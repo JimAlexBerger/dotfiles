@@ -29,6 +29,13 @@
     fzf
     vscode
     firefox
+    jetbrains.rider
+    (with dotnetCorePackages; combinePackages [
+      sdk_6_0
+      sdk_7_0
+      sdk_8_0
+    ])
+    s3cmd
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -82,7 +89,6 @@
 
     shellAliases = {
       ll = "ls -l";
-      ".." = "cd ..";
     };
 
     oh-my-zsh = {
