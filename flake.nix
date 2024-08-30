@@ -25,6 +25,10 @@
                 inherit pkgs;
                 modules = [ ./home.nix ];
             };
+	    n651227 = home-manager.lib.homeManagerConfiguration {
+		inherit pkgs;
+		modules = [ ./work-home.nix ];
+	    };
         };
     };
 }
