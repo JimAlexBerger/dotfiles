@@ -39,6 +39,19 @@
     slack
     remmina
     vault
+    spotify
+    terraform
+    kdePackages.spectacle
+    (writeShellApplication {
+      name = "s3preview";
+      runtimeInputs = [ s3cmd ];
+      text = (builtins.readFile ./work/s3preview.zsh);
+    })
+    postman
+    mpv
+    rsync
+    ffmpeg_7-full
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -91,11 +104,22 @@
 
     shellAliases = {
       ll = "ls -l";
+      s3prod = "cp $HOME/.s3cfg-prod $HOME/.s3cfg";
+      s3stage = "cp $HOME/.s3cfg-stage $HOME/.s3cfg";
+      s3test = "cp $HOME/.s3cfg-test $HOME/.s3cfg";
     };
+    
+    profileExtra = ''
+      unsetopt BEEP
+    '';
+
+    initExtra = "source ${./work/scripts.zsh}";
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" ];
+      plugins = [ 
+        "git"
+      ];
       theme = "robbyrussell";
     };
   };
@@ -119,4 +143,7 @@
   
   #for non nix-os systems
   targets.genericLinux.enable = true;
+
+  #Because nixpkgs unstable home-manager neds to accept version miss-match
+  home.enableNixpkgsReleaseCheck = false;
 }
