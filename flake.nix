@@ -3,8 +3,11 @@
 
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
-        home-manager.url = "github:nix-community/home-manager/release-23.11";
-        home-manager.inputs.nixpkgs.follows = "nixpkgs";
+        home-manager = {
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
     };
 
     
@@ -26,9 +29,9 @@
                 modules = [ ./home.nix ];
             };
 	    n651227 = home-manager.lib.homeManagerConfiguration {
-		inherit pkgs;
-		modules = [ ./work-home.nix ];
-	    };
+                inherit pkgs;
+                modules = [ ./work-home.nix ];
+            };
         };
     };
 }
