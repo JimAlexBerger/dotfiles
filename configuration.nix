@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -79,7 +80,7 @@
     isNormalUser = true;
     description = "Jim-Alexander Berger Seterdahl";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [];
+    packages = [ ];
   };
 
   # Allow unfree packages
@@ -127,7 +128,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	  # accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.

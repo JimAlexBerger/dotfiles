@@ -21,3 +21,7 @@ Make sure to install home manager
 
     home-manager switch --flake .
     home-manager switch --flake .#configuration
+
+### To format all nix files
+    
+    nix run "https://flakehub.com/f/NixOS/nixpkgs/*#nixpkgs-fmt" -- ./

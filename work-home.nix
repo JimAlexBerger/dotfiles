@@ -16,12 +16,12 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [ "electron-29.4.6" ];
-  };  
+  };
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     hello
-    cowsay    
+    cowsay
     alacritty
     neofetch
     tldr
@@ -69,7 +69,7 @@
       s3stage = "cp $HOME/.s3cfg-stage $HOME/.s3cfg";
       s3test = "cp $HOME/.s3cfg-test $HOME/.s3cfg";
     };
-    
+
     profileExtra = ''
       unsetopt BEEP
     '';
@@ -81,7 +81,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ 
+      plugins = [
         "git"
       ];
       theme = "robbyrussell";
@@ -147,7 +147,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
+
   #for non nix-os systems
   targets.genericLinux.enable = true;
 

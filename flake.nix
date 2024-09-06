@@ -1,37 +1,37 @@
 {
-    description = "JimAlexBergers flake";
+  description = "JimAlexBergers flake";
 
-    inputs = {
-        nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
-        home-manager = {
-            url = "github:nix-community/home-manager";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+  };
 
-    
-    outputs = {self, nixpkgs, home-manager, ...}:
-    let 
-        lib = nixpkgs.lib;
-        system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
-    in {
-        nixosConfigurations = {
-            nixos = lib.nixosSystem {
-                inherit system;
-                modules = [ ./configuration.nix ];
-            };
+
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      lib = nixpkgs.lib;
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      nixosConfigurations = {
+        nixos = lib.nixosSystem {
+          inherit system;
+          modules = [ ./configuration.nix ];
         };
-        homeConfigurations = {
-            jimalexberger = home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
-                modules = [ ./home.nix ];
-            };
-	    n651227 = home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
-                modules = [ ./work-home.nix ];
-            };
+      };
+      homeConfigurations = {
+        jimalexberger = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
         };
+        n651227 = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./work-home.nix ];
+        };
+      };
     };
 }
