@@ -54,6 +54,7 @@
     pbm
     wl-clipboard
     (nerdfonts.override { fonts = [ "FantasqueSansMono" "JetBrainsMono" ]; })
+    anki
   ];
 
   programs.zsh = {
