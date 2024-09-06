@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "n651227";
   home.homeDirectory = "/home/n651227";
 
@@ -15,10 +13,12 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ "electron-29.4.6" ];
+  };  
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     hello
     cowsay    
@@ -51,50 +51,11 @@
     mpv
     rsync
     ffmpeg_7-full
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    iputils
+    pbm
+    wl-clipboard
+    (nerdfonts.override { fonts = [ "FantasqueSansMono" "JetBrainsMono" ]; })
   ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/jimalexberger/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
 
   programs.zsh = {
     enable = true;
@@ -113,7 +74,10 @@
       unsetopt BEEP
     '';
 
-    initExtra = "source ${./work/scripts.zsh}";
+    initExtra = ''
+      source ${./work/scripts.zsh}
+      export VAULT_ADDR='https://vault.nrk.cloud:8200'
+    '';
 
     oh-my-zsh = {
       enable = true;
@@ -136,6 +100,49 @@
     enable = true;
     userName = "jimalexberger";
     userEmail = "jim-alexander.berger.seterdahl@nrk.no";
+  };
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    shortcut = "Space";
+    baseIndex = 1;
+
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      tmuxPlugins.catppuccin
+      tmuxPlugins.better-mouse-mode
+      tmuxPlugins.yank
+    ];
+
+    extraConfig = ''
+      # Colors
+      set -ga terminal-overrides ",xterm*:Tc"
+
+      # Mouse support
+      set-option -g mouse on
+
+      #New panes in current path
+      bind '"' split-window -v -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
+
+      # Catppuccin status bar
+      set -g @catppuccin_window_left_separator "█"
+      set -g @catppuccin_window_right_separator "█ "
+      set -g @catppuccin_window_number_position "right"
+      set -g @catppuccin_window_middle_separator "  █"
+
+      set -g @catppuccin_window_default_fill "number"
+
+      set -g @catppuccin_window_current_fill "number"
+      set -g @catppuccin_window_current_text "#{pane_current_path}"
+
+      set -g @catppuccin_status_modules_right "application session date_time"
+      set -g @catppuccin_status_left_separator  ""
+      set -g @catppuccin_status_right_separator " "
+      set -g @catppuccin_status_fill "all"
+      set -g @catppuccin_status_connect_separator "yes"
+    '';
   };
 
   # Let Home Manager install and manage itself.
