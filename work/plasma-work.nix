@@ -1,14 +1,28 @@
 { config, pkgs, ... }:
 
 {
+
+  home.packages = with pkgs; [
+    catppuccin-kde
+    catppuccin-cursors
+  ];
+
   programs.plasma = {
     enable = true;
+    overrideConfig = true;
     #
     # Some high-level settings:
     #
     workspace = {
       clickItemTo = "select";
-      lookAndFeel = "org.kde.breezetwilight.desktop";
+      lookAndFeel = "Catppuccin-Frappe-Blue";
+      colorScheme = "CatppuccinFrappeBlue";
+
+      cursor = {
+        theme = "breeze_cursors";
+        size = 32;
+      };
+
       wallpaperPictureOfTheDay = {
         provider = "apod";
         updateOverMeteredConnection = true;
@@ -25,49 +39,14 @@
     panels = [
       # Windows-like panel at the bottom
       {
+        screen = "all";
         location = "bottom";
         widgets = [
-          {
-            kickoff = {
-              sortAlphabetically = true;
-              icon = "nix-snowflake-white";
-            };
-          }
-          {
-            iconTasks = {
-              launchers = [
-                "applications:org.kde.dolphin.desktop"
-                "applications:org.kde.konsole.desktop"
-              ];
-            };
-          }
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.icontasks"
           "org.kde.plasma.marginsseparator"
-          {
-            systemTray.items = {
-              shown = [
-                "org.kde.plasma.battery"
-                "org.kde.plasma.bluetooth"
-              ];
-              hidden = [
-                "org.kde.plasma.networkmanagement"
-                "org.kde.plasma.volume"
-              ];
-            };
-          }
-          {
-            digitalClock = {
-              calendar.firstDayOfWeek = "monday";
-              time.format = "24h";
-            };
-          }
-        ];
-      }
-      # Global menu at the top
-      {
-        location = "top";
-        height = 26;
-        widgets = [
-          "org.kde.plasma.appmenu"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.digitalclock"
         ];
       }
     ];
