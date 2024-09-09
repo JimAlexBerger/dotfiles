@@ -162,6 +162,12 @@
     enable = true;
     flavor = "frappe";
     accent = "blue";
+
+    pointerCursor = {
+      enable = true;
+      flavor = "frappe";
+      accent = "blue";
+    };
   };
 
   # Let Home Manager install and manage itself.

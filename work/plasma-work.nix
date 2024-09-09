@@ -19,8 +19,8 @@
       colorScheme = "CatppuccinFrappeBlue";
 
       cursor = {
-        theme = "breeze_cursors";
-        size = 32;
+        theme = "catppuccin-frappe-blue-cursors";
+        size = 24;
       };
 
       wallpaperPictureOfTheDay = {
@@ -41,10 +41,17 @@
       {
         screen = "all";
         location = "bottom";
-        height = 44;
+        height = 34;
         widgets = [
           "org.kde.plasma.kickoff"
-          "org.kde.plasma.icontasks"
+          {
+            iconTasks = {
+              launchers = [
+                "applications:org.kde.dolphin.desktop"
+                "applications:org.kde.konsole.desktop"
+              ];
+            };
+          }
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
