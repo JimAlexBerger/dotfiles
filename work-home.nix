@@ -86,10 +86,19 @@
 
   programs.vscode = {
     enable = true;
+    mutableExtensionsDir = true; #declarative in the future? :)
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       yzhang.markdown-all-in-one
+      catppuccin.catppuccin-vsc
+      catppuccin.catppuccin-vsc-icons
     ];
+    userSettings = {
+      # Styling
+      "window.autoDetectColorScheme" = true;
+      "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
+      "workbench.iconTheme" = "catppuccin-frappe";
+    };
   };
 
   programs.git = {
