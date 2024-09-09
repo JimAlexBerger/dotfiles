@@ -41,6 +41,7 @@
       {
         screen = "all";
         location = "bottom";
+        height = 44;
         widgets = [
           "org.kde.plasma.kickoff"
           "org.kde.plasma.icontasks"
@@ -81,4 +82,17 @@
       };
     };
   };
+
+  programs.konsole = {
+    enable = true;
+    defaultProfile = "catppuccin_frappe";
+    profiles = {
+      catppuccin_frappe = {
+        font.name = "JetBrainsMono";
+        colorScheme = "catppuccin-frappe";
+      };
+    };
+  };
+
+  home.file.".local/share/konsole/catppuccin-frappe.colorscheme".source = ./konsole-colorschemes/catppuccin-frappe.colorscheme;
 }

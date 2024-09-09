@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
+    catppuccin.url = "github:catppuccin/nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +16,7 @@
   };
 
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -38,6 +39,7 @@
         n651227 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            catppuccin.homeManagerModules.catppuccin
             plasma-manager.homeManagerModules.plasma-manager
             ./work-home.nix
           ];

@@ -57,6 +57,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    syntaxHighlighting.catppuccin.enable = true;
 
     shellAliases = {
       ll = "ls -l";
@@ -146,6 +147,12 @@
       buildInputs = old.buildInputs ++ [ pkgs.wayland pkgs.pkg-config ];
       enableWayland = true;
     }));
+  };
+
+  catppuccin = {
+    enable = true;
+    flavor = "frappe";
+    accent = "blue";
   };
 
   # Let Home Manager install and manage itself.
