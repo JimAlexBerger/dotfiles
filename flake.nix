@@ -31,15 +31,15 @@
       homeConfigurations = {
         jimalexberger = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ 
-              ./home.nix 
-            ];
+          modules = [
+            ./home.nix
+          ];
         };
         n651227 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ 
+          modules = [
             plasma-manager.homeManagerModules.plasma-manager
-            ./work-home.nix 
+            ./work-home.nix
           ];
         };
       };
