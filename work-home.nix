@@ -18,7 +18,6 @@
     hello
     cowsay
     neofetch
-    tldr
     manix
     fzf
     vscode
@@ -35,7 +34,6 @@
     vault
     spotify
     terraform
-    kdePackages.spectacle
     (writeShellApplication {
       name = "s3preview";
       runtimeInputs = [ s3cmd ];
@@ -50,6 +48,18 @@
     wl-clipboard
     (nerdfonts.override { fonts = [ "FantasqueSansMono" "JetBrainsMono" ]; })
     anki
+    teams-for-linux
+    bc
+    git
+    github-cli
+    htop
+    jq
+    man-db
+    man-pages
+    paru
+    tlrc
+    less
+    shell-gpt
   ];
 
   programs.zsh = {

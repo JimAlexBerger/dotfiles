@@ -5,6 +5,8 @@
   home.packages = with pkgs; [
     catppuccin-kde
     catppuccin-cursors
+    plasma-browser-integration
+    kdePackages.spectacle
   ];
 
   programs.plasma = {
@@ -39,9 +41,12 @@
     panels = [
       # Windows-like panel at the bottom
       {
-        screen = "all";
-        location = "bottom";
+        alignment = "center";
+        floating = false;
         height = 34;
+        lengthMode = "fill";
+        location = "bottom";
+        screen = 0;
         widgets = [
           "org.kde.plasma.kickoff"
           {
@@ -69,10 +74,6 @@
 
       kwin = {
         "Expose" = "Meta+,";
-        "Switch Window Down" = "Meta+J";
-        "Switch Window Left" = "Meta+H";
-        "Switch Window Right" = "Meta+L";
-        "Switch Window Up" = "Meta+K";
       };
     };
 
