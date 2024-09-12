@@ -60,6 +60,16 @@
     tlrc
     less
     shell-gpt
+    (pkgs.spotify-player.override {
+      withAudioBackend = "pulseaudio";
+      withStreaming = true;
+      withDaemon = true;
+      withMediaControl = true;
+      withLyrics = true;
+      withImage = true;
+      withNotify = true;
+      withSixel = true;
+    })
   ];
 
   programs.zsh = {
