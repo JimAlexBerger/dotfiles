@@ -70,6 +70,10 @@
       withNotify = true;
       withSixel = true;
     })
+    (pkgs.python3.withPackages (python-pkgs: [
+      python-pkgs.gyp
+      python-pkgs.distutils
+    ]))
   ];
 
   programs.zsh = {

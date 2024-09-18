@@ -27,3 +27,7 @@ s3cat () {
         cat $outpath
     fi
 }
+
+play_two () {
+    mpv $1 --external-file=$2 --lavfi-complex='[vid1] [vid2] hstack [vo]'
+}
