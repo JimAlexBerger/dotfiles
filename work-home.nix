@@ -74,6 +74,7 @@
       python-pkgs.gyp
       python-pkgs.distutils
     ]))
+    nixos-generators
   ];
 
   programs.zsh = {
