@@ -4,7 +4,7 @@
   home.username = "n651227";
   home.homeDirectory = "/home/n651227";
 
-  imports = [ ./work/plasma-work.nix ];
+  imports = [ ./plasma/plasma-work.nix ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
 

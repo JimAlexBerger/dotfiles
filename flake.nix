@@ -26,14 +26,14 @@
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix ];
+          modules = [ ./machines/personal/configuration.nix ];
         };
       };
       homeConfigurations = {
         jimalexberger = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            ./home.nix
+            ./home/personal/home.nix
           ];
         };
         n651227 = home-manager.lib.homeManagerConfiguration {
@@ -41,7 +41,7 @@
           modules = [
             catppuccin.homeManagerModules.catppuccin
             plasma-manager.homeManagerModules.plasma-manager
-            ./work-home.nix
+            ./home/work/work-home.nix
           ];
         };
       };
