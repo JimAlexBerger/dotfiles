@@ -28,10 +28,13 @@
           inherit system;
           modules = [ ./machines/personal/configuration.nix ];
         };
-        nrklx75718 = lib.nixosSystem {
+        nrklx75718-vm = lib.nixosSystem {
           inherit system;
-          modules = [ ./machines/work/configuration.nix ]
-        }
+          modules = [
+            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+            ./machines/work/configuration.nix 
+          ];
+        };
       };
       homeConfigurations = {
         jimalexberger = home-manager.lib.homeManagerConfiguration {
