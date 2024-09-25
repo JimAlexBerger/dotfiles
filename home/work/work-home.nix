@@ -75,6 +75,7 @@
       python-pkgs.distutils
     ]))
     nixos-generators
+    lazydocker
   ];
 
   programs.zsh = {
