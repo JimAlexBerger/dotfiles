@@ -31,13 +31,18 @@
     s3cmd
     slack
     remmina
-    vault
+    vault-bin
     spotify
     terraform
     (writeShellApplication {
       name = "s3preview";
       runtimeInputs = [ s3cmd ];
-      text = (builtins.readFile ./work/s3preview.zsh);
+      text = (builtins.readFile ./work/s3preview.sh);
+    })
+    (writeShellApplication {
+      name = "s3find";
+      runtimeInputs = [ s3cmd ];
+      text = (builtins.readFile ./work/s3find.sh);
     })
     postman
     mpv
@@ -76,6 +81,8 @@
     ]))
     nixos-generators
     lazydocker
+    atac
+    dbeaver-bin
   ];
 
   programs.zsh = {
