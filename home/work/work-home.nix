@@ -203,12 +203,13 @@
     };
   };
 
-  programs.kitty = {
-    enable = true;
-    font.name = "JetBrainsMono";
-    shellIntegration.enableZshIntegration = true;
-    themeFile = "Catppuccin-Frappe";
-  };
+  #programs.kitty = {
+  #  enable = true;
+  #  package = "";
+  #  font.name = "JetBrainsMono";
+  #  shellIntegration.enableZshIntegration = true;
+  #  themeFile = "Catppuccin-Frappe";
+  #};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
