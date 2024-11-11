@@ -17,3 +17,7 @@ s3cat () {
 play_two () {
     mpv $1 --external-file=$2 --lavfi-complex='[vid1] [vid2] hstack [vo]'
 }
+
+find_potion () {
+    curl -s "https://origo-service-discovery.kubeint.nrk.no/rule?url=$1" | jq '.links.[] | select(.rel=="potion-meo-details").href' | xargs firefox -new-tab
+}

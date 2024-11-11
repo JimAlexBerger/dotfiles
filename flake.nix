@@ -32,7 +32,7 @@
           inherit system;
           modules = [
             (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-            ./machines/work/configuration.nix 
+            ./machines/work/configuration.nix
           ];
         };
       };

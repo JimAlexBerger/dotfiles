@@ -6,7 +6,6 @@
     catppuccin-kde
     catppuccin-cursors
     plasma-browser-integration
-    kdePackages.spectacle
   ];
 
   programs.plasma = {
