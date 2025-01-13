@@ -1,0 +1,7 @@
+keys:
+  - &host_nrklx75718 age10fpkywwg6stsueqyf56lz87wyuyc2gq5glumztn269sgj0tywpdqxtstut
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+    - age:
+      - *host_nrklx75718

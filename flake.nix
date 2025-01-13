@@ -17,10 +17,11 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";

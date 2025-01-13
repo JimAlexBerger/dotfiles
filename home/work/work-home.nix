@@ -1,4 +1,4 @@
-{ spicetify-nix, ... }:
+{ spicetify-nix, sops-nix, ... }:
 { config, pkgs, ... }:
 {
   home.username = "n651227";
@@ -6,6 +6,7 @@
 
   imports = [
     spicetify-nix.homeManagerModules.default
+    sops-nix.homeManagerModules.sops
     ./plasma/plasma-work.nix
   ];
 
@@ -89,7 +90,21 @@
     pv
     yt-dlp
     darktable
+    age
+    sops
   ];
+
+  sops = {
+    age.keyFile = "/home/n651227/.config/sops/age/keys.txt"; # must have no password!
+
+    defaultSopsFile = ../../secrets.yaml;
+    defaultSymlinkPath = "/run/user/1000/secrets";
+    defaultSecretsMountPoint = "/run/user/1000/secrets.d";
+
+    secrets.test_secret = {
+      path = "${config.sops.defaultSymlinkPath}/test_secret";
+    };
+  };
 
   programs.zsh = {
     enable = true;
@@ -111,6 +126,7 @@
     initExtra = ''
       source ${./work/scripts.zsh}
       export VAULT_ADDR='https://vault.nrk.cloud:8200'
+      export TEST_SECRET=$(cat ${config.sops.secrets.test_secret.path})
     '';
 
     oh-my-zsh = {
