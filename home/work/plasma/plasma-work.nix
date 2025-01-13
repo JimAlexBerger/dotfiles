@@ -19,6 +19,8 @@
       lookAndFeel = "Catppuccin-Frappe-Blue";
       colorScheme = "CatppuccinFrappeBlue";
 
+      wallpaperBackground.color = "219,99,99";
+
       cursor = {
         theme = "catppuccin-frappe-blue-cursors";
         size = 24;

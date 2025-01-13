@@ -13,10 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, ... }:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -48,7 +52,7 @@
           modules = [
             catppuccin.homeManagerModules.catppuccin
             plasma-manager.homeManagerModules.plasma-manager
-            ./home/work/work-home.nix
+            (import ./home/work/work-home.nix inputs)
           ];
         };
       };

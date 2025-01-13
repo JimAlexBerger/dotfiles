@@ -1,16 +1,22 @@
+{ spicetify-nix, ... }:
 { config, pkgs, ... }:
-
 {
   home.username = "n651227";
   home.homeDirectory = "/home/n651227";
 
-  imports = [ ./plasma/plasma-work.nix ];
+  imports = [
+    spicetify-nix.homeManagerModules.default
+    ./plasma/plasma-work.nix
+  ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "electron-29.4.6" ];
+    permittedInsecurePackages = [
+      "electron-29.4.6"
+      "dotnet-sdk-7.0.410"
+    ];
   };
 
   fonts.fontconfig.enable = true;
@@ -24,15 +30,13 @@
     firefox
     jetbrains.rider
     (with dotnetCorePackages; combinePackages [
-      sdk_6_0
-      sdk_7_0
       sdk_8_0
+      sdk_9_0
     ])
     s3cmd
     slack
     remmina
     vault-bin
-    spotify
     terraform
     (writeShellApplication {
       name = "s3preview";
@@ -51,7 +55,8 @@
     iputils
     pbm
     wl-clipboard
-    (nerdfonts.override { fonts = [ "FantasqueSansMono" "JetBrainsMono" ]; })
+    nerd-fonts.fantasque-sans-mono
+    nerd-fonts.jetbrains-mono
     anki
     teams-for-linux
     bc
@@ -83,6 +88,7 @@
     obsidian
     pv
     yt-dlp
+    darktable
   ];
 
   programs.zsh = {
@@ -90,7 +96,6 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    syntaxHighlighting.catppuccin.enable = true;
 
     shellAliases = {
       ll = "ls -l";
@@ -191,12 +196,46 @@
     }));
   };
 
+  programs.spicetify = 
+    let 
+      spicePkgs = spicetify-nix.legacyPackages.${pkgs.system};
+    in
+    {
+      enable = true;
+      enabledExtensions = with spicePkgs.extensions; [
+        hidePodcasts
+        shuffle
+        lastfm
+        (
+          {
+            src = pkgs.fetchFromGitHub {
+              owner = "BlafKing";
+              repo = "spicetify-cat-jam-synced";
+              rev = "e7bfd49fcc13457bbc98e696294cf5cf43eb6c31";
+              hash = "sha256-pyYa5i/gmf01dkEF9I2awrTGLqkAjV9edJBsThdFRv8=";
+            };
+            name = "marketplace/cat-jam.js";
+          }
+        )
+      ];
+      enabledCustomApps = with spicePkgs.apps; [
+        lyricsPlus
+        reddit
+        marketplace
+        betterLibrary
+      ];
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "frappe";
+    };
+
   catppuccin = {
     enable = true;
     flavor = "frappe";
     accent = "blue";
 
-    pointerCursor = {
+    zsh-syntax-highlighting.enable = true;
+
+    cursors = {
       enable = true;
       flavor = "frappe";
       accent = "blue";
