@@ -25,3 +25,8 @@ Make sure to install home manager
 ### To format all nix files
     
     nix run "https://flakehub.com/f/NixOS/nixpkgs/*#nixpkgs-fmt" -- ./
+
+
+### To update sops secrets
+
+    nix-shell -p sops --run "sops secrets.yaml"

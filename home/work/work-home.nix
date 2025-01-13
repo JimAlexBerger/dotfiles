@@ -212,8 +212,8 @@
     }));
   };
 
-  programs.spicetify = 
-    let 
+  programs.spicetify =
+    let
       spicePkgs = spicetify-nix.legacyPackages.${pkgs.system};
     in
     {
