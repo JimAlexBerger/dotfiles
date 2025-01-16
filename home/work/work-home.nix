@@ -95,15 +95,16 @@
   ];
 
   sops = {
-    age.keyFile = "/home/n651227/.config/sops/age/keys.txt"; # must have no password!
+    age.keyFile = "/home/n651227/.config/sops/age/keys.txt";
 
-    defaultSopsFile = ../../secrets.yaml;
+    defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSymlinkPath = "/run/user/1000/secrets";
     defaultSecretsMountPoint = "/run/user/1000/secrets.d";
 
-    secrets.test_secret = {
-      path = "${config.sops.defaultSymlinkPath}/test_secret";
-    };
+    secrets.test_secret.path = "${config.sops.defaultSymlinkPath}/test_secret";
+    secrets.NRK_GITHUB_TOKEN.path = "${config.sops.defaultSymlinkPath}/NRK_GITHUB_TOKEN";
+    secrets.PHOBOS_NUGET_USERNAME.path = "${config.sops.defaultSymlinkPath}/PHOBOS_NUGET_USERNAME";
+    secrets.PHOBOS_NUGET_PASSWORD.path = "${config.sops.defaultSymlinkPath}/PHOBOS_NUGET_PASSWORD";
   };
 
   programs.zsh = {
@@ -127,6 +128,9 @@
       source ${./work/scripts.zsh}
       export VAULT_ADDR='https://vault.nrk.cloud:8200'
       export TEST_SECRET=$(cat ${config.sops.secrets.test_secret.path})
+      export NRK_GITHUB_TOKEN=$(cat ${config.sops.secrets.NRK_GITHUB_TOKEN.path})
+      export PHOBOS_NUGET_USERNAME=$(cat ${config.sops.secrets.PHOBOS_NUGET_USERNAME.path})
+      export PHOBOS_NUGET_PASSWORD=$(cat ${config.sops.secrets.PHOBOS_NUGET_PASSWORD.path})
     '';
 
     oh-my-zsh = {
