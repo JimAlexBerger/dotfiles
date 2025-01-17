@@ -92,6 +92,7 @@
     darktable
     age
     sops
+    pre-commit
   ];
 
   sops = {
