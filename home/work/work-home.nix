@@ -105,6 +105,21 @@
     secrets.NRK_GITHUB_TOKEN.path = "${config.sops.defaultSymlinkPath}/NRK_GITHUB_TOKEN";
     secrets.PHOBOS_NUGET_USERNAME.path = "${config.sops.defaultSymlinkPath}/PHOBOS_NUGET_USERNAME";
     secrets.PHOBOS_NUGET_PASSWORD.path = "${config.sops.defaultSymlinkPath}/PHOBOS_NUGET_PASSWORD";
+
+    secrets.s3cfg-prod = {
+      format = "binary";
+      sopsFile = ../../secrets/s3-configs/s3cfg-prod;
+    };
+
+    secrets.s3cfg-stage = {
+      format = "binary";
+      sopsFile = ../../secrets/s3-configs/s3cfg-stage;
+    };
+
+    secrets.s3cfg-test = {
+      format = "binary";
+      sopsFile = ../../secrets/s3-configs/s3cfg-test;
+    };
   };
 
   programs.zsh = {
@@ -115,9 +130,9 @@
 
     shellAliases = {
       ll = "ls -l";
-      s3prod = "cp $HOME/.s3cfg-prod $HOME/.s3cfg";
-      s3stage = "cp $HOME/.s3cfg-stage $HOME/.s3cfg";
-      s3test = "cp $HOME/.s3cfg-test $HOME/.s3cfg";
+      s3prod = "cp ${config.sops.secrets.s3cfg-prod.path} $HOME/.s3cfg";
+      s3stage = "cp ${config.sops.secrets.s3cfg-stage.path} $HOME/.s3cfg";
+      s3test = "cp ${config.sops.secrets.s3cfg-test.path} $HOME/.s3cfg";
     };
 
     profileExtra = ''
