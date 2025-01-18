@@ -18,10 +18,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-
-  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, disko, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -38,6 +41,14 @@
           modules = [
             (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
             ./machines/work/configuration.nix
+          ];
+        };
+        reticulum = lib.nixosSystem {
+          inherit system;
+          modules = [
+            disko.nixosModules.disko
+            ./machines/personal/reticulum/configuration.nix
+            ./machines/personal/reticulum/hardware-configuration.nix
           ];
         };
       };

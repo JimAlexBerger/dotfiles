@@ -30,3 +30,7 @@ Make sure to install home manager
 ### To update sops secrets
 
     nix-shell -p sops --run "sops secrets.yaml"
+
+### Install nix anywhere
+
+    nix run github:nix-community/nixos-anywhere -- --flake <path to configuration>#<configuration name> --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>

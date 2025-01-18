@@ -52,6 +52,26 @@
         "url": "https://flakehub.com/f/catppuccin/nix/1.2.%2A.tar.gz"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737038063,
+        "narHash": "sha256-rMEuiK69MDhjz1JgbaeQ9mBDXMJ2/P8vmOYRbFndXsk=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "bf0abfde48f469c256f2b0f481c6281ff04a5db2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -289,6 +309,7 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
+        "disko": "disko",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_2",
         "plasma-manager": "plasma-manager",
