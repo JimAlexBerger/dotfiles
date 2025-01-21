@@ -47,6 +47,7 @@
           inherit system;
           modules = [
             disko.nixosModules.disko
+            sops-nix.nixosModules.sops
             ./machines/personal/reticulum/configuration.nix
             ./machines/personal/reticulum/hardware-configuration.nix
           ];

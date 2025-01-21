@@ -32,6 +32,40 @@
           };
         };
       };
+      ssd1 = {
+        type = "disk";
+        device = "/dev/sda";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt/ssd1";
+              };
+            };
+          };
+        };
+      };
+      ssd2 = {
+        type = "disk";
+        device = "/dev/sdb";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt/ssd2";
+              };
+            };
+          };
+        };
+      };
     };
   };
 }

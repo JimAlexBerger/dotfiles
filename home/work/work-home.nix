@@ -93,6 +93,8 @@
     age
     sops
     pre-commit
+    nixos-rebuild
+    mkpasswd
   ];
 
   sops = {
