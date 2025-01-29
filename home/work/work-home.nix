@@ -28,7 +28,6 @@
     manix
     fzf
     vscode
-    firefox
     jetbrains.rider
     (with dotnetCorePackages; combinePackages [
       sdk_8_0
@@ -278,6 +277,10 @@
       flavor = "frappe";
       accent = "blue";
     };
+  };
+
+  programs.firefox = {
+    enable = true;
   };
 
   #programs.kitty = {
