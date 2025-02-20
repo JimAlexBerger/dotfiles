@@ -20,6 +20,12 @@
     ];
   };
 
+  nix.package = pkgs.nix;
+  nix.settings =
+    {
+      extra-experimental-features = [ "nix-command" "flakes" ];
+    };
+
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     hello
@@ -75,7 +81,6 @@
       withStreaming = true;
       withDaemon = true;
       withMediaControl = true;
-      withLyrics = true;
       withImage = true;
       withNotify = true;
       withSixel = true;
