@@ -181,10 +181,10 @@
         catppuccin.catppuccin-vsc-icons
       ];
       userSettings = {
-        # Styling
         "window.autoDetectColorScheme" = true;
         "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
         "workbench.iconTheme" = "catppuccin-frappe";
+        "git.enableSmartCommit" = "true";
       };
     };
   };
