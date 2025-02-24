@@ -127,6 +127,11 @@
       format = "binary";
       sopsFile = ../../secrets/s3-configs/s3cfg-test;
     };
+
+    secrets.atuin-key = {
+      format = "binary";
+      sopsFile = ../../secrets/atuin/.atuin-key;
+    };
   };
 
   programs.zsh = {
@@ -286,6 +291,15 @@
 
   programs.firefox = {
     enable = true;
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    daemon.enable = true;
+    settings = {
+      key_path = config.sops.secrets.atuin-key.path;
+    };
   };
 
   #programs.kitty = {
