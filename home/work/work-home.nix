@@ -99,6 +99,7 @@
     pre-commit
     nixos-rebuild
     mkpasswd
+    element-desktop
   ];
 
   sops = {
