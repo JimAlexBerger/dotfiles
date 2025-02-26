@@ -300,8 +300,15 @@
     enable = true;
     enableZshIntegration = true;
     daemon.enable = true;
+    flags = [
+      "--disable-up-arrow"
+    ];
     settings = {
       key_path = config.sops.secrets.atuin-key.path;
+      auto_sync = true;
+      sync_frequency = "5m";
+      enter_accept = false;
+      update_check = false;
     };
   };
 
