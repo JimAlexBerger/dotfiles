@@ -1,9 +1,9 @@
 repos:
 - repo: https://github.com/yuvipanda/pre-commit-hook-ensure-sops
-  rev: v1.0
+  rev: v1.1
   hooks:
   - id: sops-encryption
 - repo: https://github.com/nix-community/nixpkgs-fmt
-  rev: master
+  rev: v1.3.0
   hooks:
   - id: nixpkgs-fmt
