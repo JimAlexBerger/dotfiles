@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     catppuccin-kde
     catppuccin-cursors
-    plasma-browser-integration
+    kdePackages.plasma-browser-integration
   ];
 
   programs.plasma = {

@@ -100,6 +100,15 @@
     nixos-rebuild
     mkpasswd
     element-desktop
+    bluetui
+    nixgl.nixGLIntel
+    azure-cli
+    kubelogin
+    kubectl
+    kubectx
+    k9s
+    direnv
+    pulsemixer
   ];
 
   sops = {
