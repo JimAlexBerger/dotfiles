@@ -44,10 +44,7 @@
         };
         nrklx75718-vm = lib.nixosSystem {
           inherit system;
-          modules = [
-            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-            ./machines/work/configuration.nix
-          ];
+          modules = [ ./machines/work/configuration.nix ];
         };
         reticulum = lib.nixosSystem {
           inherit system;

@@ -13,7 +13,7 @@
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/nvme0n1";
+  boot.loader.grub.device = "/dev/vda";
   boot.loader.grub.useOSProber = true;
 
   environment.shells = with pkgs; [ zsh ];
@@ -46,13 +46,12 @@
   # Configure keymap in X11
   services.xserver = {
     layout = "no";
-    xkbVariant = "";
+    xkbVariant = "nodeadkeys";
   };
 
   # Configure console keymap
   console.keyMap = "no";
 
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -81,9 +80,10 @@
     zsh
     git
     wget
-    steam
+    home-manager
   ];
 
+  programs.firefox.enable = true;
 
   # Enable OpenGL
   #hardware.opengl = {
@@ -149,7 +149,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
