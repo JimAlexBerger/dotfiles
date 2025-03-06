@@ -8,6 +8,7 @@
     spicetify-nix.homeManagerModules.default
     sops-nix.homeManagerModules.sops
     ./plasma/plasma-work.nix
+    ../packages/f5vpn.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
