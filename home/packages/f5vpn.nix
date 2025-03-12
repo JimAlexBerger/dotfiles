@@ -62,6 +62,5 @@ in
 {
   home.packages =
     [
-      f5vpn
     ];
 }

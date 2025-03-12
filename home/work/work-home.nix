@@ -18,6 +18,7 @@
     permittedInsecurePackages = [
       "electron-29.4.6"
       "dotnet-sdk-7.0.410"
+      "dotnet-sdk-6.0.428"
     ];
   };
 
@@ -37,8 +38,9 @@
     vscode
     jetbrains.rider
     (with dotnetCorePackages; combinePackages [
-      sdk_8_0
       sdk_9_0
+      sdk_8_0
+      sdk_6_0
     ])
     s3cmd
     slack
@@ -110,6 +112,7 @@
     k9s
     direnv
     pulsemixer
+    (import ../packages/purpleExplorer.nix pkgs)
   ];
 
   sops = {
@@ -287,6 +290,7 @@
       theme = spicePkgs.themes.catppuccin;
       colorScheme = "frappe";
     };
+
 
   catppuccin = {
     enable = true;
