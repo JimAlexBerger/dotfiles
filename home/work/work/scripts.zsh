@@ -14,10 +14,22 @@ s3cat () {
     fi
 }
 
+localcat () {
+    progidraw=$1                                                                                                                                                                                                                                               
+    progid=${progidraw:l}  # Convert to lowercase                                                                                                                                                                                                              
+    progprefix=${progid:0:6}
+    progprefix2=${progid:6:2}
+    find /mnt/mediashare/$progprefix/$progprefix2/$progid | fzf --no-sort
+}
+
 play_two () {
     mpv $1 --external-file=$2 --lavfi-complex='[vid1] [vid2] hstack [vo]'
 }
 
 find_potion () {
     curl -s "https://origo-service-discovery.kubeint.nrk.no/rule?url=$1" | jq '.links.[] | select(.rel=="potion-meo-details").href' | xargs firefox -new-tab
+}
+
+origo () {
+    curl -s "https://origo-service-discovery.kubeint.nrk.no/rule?url=$1" | jq -r '.links[] | "\(.title)\t\(.href)"' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {-1}' | awk -F'\t' '{print $2}' | xargs firefox -new-tab
 }
