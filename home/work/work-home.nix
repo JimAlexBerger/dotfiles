@@ -8,7 +8,6 @@
     spicetify-nix.homeManagerModules.default
     sops-nix.homeManagerModules.sops
     ./plasma/plasma-work.nix
-    ../packages/f5vpn.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
@@ -112,8 +111,10 @@
     k9s
     direnv
     pulsemixer
-    (import ../packages/purpleExplorer.nix pkgs)
   ];
+
+  programs.f5vpn.enable = false;
+  programs.purpleExplorer.enable = true;
 
   sops = {
     age.keyFile = "/home/n651227/.config/sops/age/keys.txt";

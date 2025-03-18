@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
+with lib;
 let
+  cfg = config.programs.f5vpn;
   f5vpn =
     (
       pkgs.stdenv.mkDerivation {
@@ -60,7 +62,24 @@ let
     );
 in
 {
-  home.packages =
-    [
-    ];
+  options.programs.f5vpn = {
+    enable = lib.mkEnableOption "Enable f5vpn";
+  };
+
+  config = mkIf cfg.enable {
+    home.packages =
+      [
+        f5vpn
+      ];
+
+    /*systemd.user.services.f5vpn = {
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.hello}/bin/hello -g'Hello!'";
+        Restart = "on-failure";
+        User = "n651227";
+      };
+      wantedBy = [ "multi-user.target" ];
+    };*/
+  };
 }

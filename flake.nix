@@ -68,6 +68,7 @@
           modules = [
             catppuccin.homeManagerModules.catppuccin
             plasma-manager.homeManagerModules.plasma-manager
+            ./packages
             (import ./home/work/work-home.nix inputs)
           ];
         };
