@@ -153,6 +153,11 @@
       format = "binary";
       sopsFile = ../../secrets/atuin/.atuin-key;
     };
+
+    secrets."vpn-cert.p12" = {
+      format = "binary";
+      sopsFile = ../../secrets/certs/n651227-vpn.p12;
+    };
   };
 
   programs.zsh = {
