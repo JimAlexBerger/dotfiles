@@ -44,7 +44,10 @@
         };
         nrklx75718-vm = lib.nixosSystem {
           inherit system;
-          modules = [ ./machines/work/configuration.nix ];
+          modules = [
+            ./modules/nixosModules
+            ./machines/work/configuration.nix
+          ];
         };
         reticulum = lib.nixosSystem {
           inherit system;

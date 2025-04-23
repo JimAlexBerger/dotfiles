@@ -84,6 +84,10 @@
   ];
 
   programs.firefox.enable = true;
+  programs.f5vpn = {
+    enable = true;
+    oesisUser = "n651227";
+  };
 
   # Enable OpenGL
   #hardware.opengl = {

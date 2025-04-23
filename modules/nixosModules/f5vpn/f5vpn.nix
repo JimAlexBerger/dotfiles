@@ -1,6 +1,7 @@
 { lib, config, pkgs, ... }:
 with lib;
 let
+  cfg = config.programs.f5vpn;
   f5vpn =
     (
       pkgs.stdenv.mkDerivation {
@@ -9,7 +10,7 @@ let
 
         src = pkgs.fetchurl {
           url = "https://access.nrk.no/public/download/linux_f5vpn.x86_64.deb";
-          hash = "sha256-0GHWo9T8QfRJx1zn0kzJx0C28wWWD1nmU8bFb8iB4/E=";
+          hash = "sha256-FgqPDg4FigZvNvka802CG4jZGc51boZsA83+T2cLAQU=";
         };
 
         nativeBuildInputs = with pkgs; [ dpkg binutils libcap patchelf ];
@@ -177,41 +178,41 @@ in
       {
         type = lib.types.str;
         description = "The user wich will have the oesis installed.";
-      }
       };
-
-    config = mkIf cfg.enable {
-
-      environment.systemPackages = [ f5vpn f5epi oesis ]
-
-        security.wrappers = {
-      svpn = {
-      source = "${f5vpn}/opt/f5/vpn/svpn";
-      owner = "root";
-      group = "root";
-      setuid = true;
-    };
-    f5vpn = {
-      source = "${f5vpn}/opt/f5/vpn/f5vpn";
-      owner = "root";
-      group = "root";
-      capabilities = "cap_kill+ep";
-    };
   };
 
-  systemd.tmpfiles.rules = [
-    "d /opt/f5/vpn 0755 root root -"
-    "L+ /opt/f5/vpn/svpn - - - - /run/wrappers/bin/svpn"
-    "L+ /opt/f5/vpn/f5vpn - - - - /run/wrappers/bin/f5vpn"
-    "L+ /opt/f5/vpn/tunnelserver - - - - ${f5vpn}/opt/f5/vpn/tunnelserver"
+  config = mkIf cfg.enable {
 
-    "d /opt/f5/epi 0755 root root -"
-    "L+ /opt/f5/epi/f5epi - - - - ${f5epi}/opt/f5/epi/f5epi"
-    "L+ /opt/f5/epi/f5PolicyServer - - - - ${f5epi}/opt/f5/epi/f5PolicyServer"
+    environment.systemPackages = [ f5vpn f5epi oesis ];
 
-    "d /home/${cfg.oesisUser}/.F5Networks/Inspectors"
-    "L+ /home/${cfg.oesisUser}/.F5Networks/Inspectors - - - - ${oesis}"
-  ];
+    security.wrappers = {
+      svpn = {
+        source = "${f5vpn}/opt/f5/vpn/svpn";
+        owner = "root";
+        group = "root";
+        setuid = true;
+      };
 
-};
+      f5vpn = {
+        source = "${f5vpn}/opt/f5/vpn/f5vpn";
+        owner = "root";
+        group = "root";
+        capabilities = "cap_kill+ep";
+      };
+    };
+
+    systemd.tmpfiles.rules = [
+      "d /opt/f5/vpn 0755 root root -"
+      "L+ /opt/f5/vpn/svpn - - - - /run/wrappers/bin/svpn"
+      "L+ /opt/f5/vpn/f5vpn - - - - /run/wrappers/bin/f5vpn"
+      "L+ /opt/f5/vpn/tunnelserver - - - - ${f5vpn}/opt/f5/vpn/tunnelserver"
+
+      "d /opt/f5/epi 0755 root root -"
+      "L+ /opt/f5/epi/f5epi - - - - ${f5epi}/opt/f5/epi/f5epi"
+      "L+ /opt/f5/epi/f5PolicyServer - - - - ${f5epi}/opt/f5/epi/f5PolicyServer"
+
+      "L+ /home/${cfg.oesisUser}/.F5Networks/Inspectors - - - - ${oesis}"
+    ];
+
+  };
 }
