@@ -112,6 +112,7 @@
     direnv
     pulsemixer
     google-cloud-sdk
+    nix-output-monitor
     nh
   ];
 

@@ -66,23 +66,5 @@ in
     enable = lib.mkEnableOption "Enable f5vpn";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages =
-      [
-        f5vpn
-      ];
-
-    systemd.tmpfiles.rules = [
-      # Ensure base directory exists
-      "d /opt/f5/vpn 0755 root root -"
-      # Link svpn to the SUID wrapper
-      "L+ /opt/f5/vpn/svpn - - - - /run/wrappers/bin/f5vpn-svpn"
-      # Link f5vpn to the capability wrapper
-      "L+ /opt/f5/vpn/f5vpn - - - - /run/wrappers/bin/f5vpn-main"
-      # Link tunnelserver directly to the store path
-      "L+ /opt/f5/vpn/tunnelserver - - - - ${cfg_vpn.package}/opt/f5/vpn/tunnelserver"
-      # Add other necessary links for files under /opt/f5/vpn if needed
-      # e.g., "L+ /opt/f5/vpn/lib - - - - ${cfg_vpn.package}/opt/f5/vpn/lib"
-    ];
-  };
+  config = mkIf cfg.enable { };
 }
