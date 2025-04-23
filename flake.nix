@@ -66,7 +66,7 @@
         n651227 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            catppuccin.homeManagerModules.catppuccin
+            catppuccin.homeModules.catppuccin
             plasma-manager.homeManagerModules.plasma-manager
             ./packages
             (import ./home/work/work-home.nix inputs)

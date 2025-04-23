@@ -111,10 +111,16 @@
     k9s
     direnv
     pulsemixer
+    google-cloud-sdk
+    nh
   ];
 
   programs.f5vpn.enable = false;
   programs.purpleExplorer.enable = true;
+
+  home.sessionVariables = {
+    FLAKE = "/home/n651227/repos/dotfiles";
+  };
 
   sops = {
     age.keyFile = "/home/n651227/.config/sops/age/keys.txt";
@@ -191,8 +197,8 @@
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         yzhang.markdown-all-in-one
-        catppuccin.catppuccin-vsc
-        catppuccin.catppuccin-vsc-icons
+        # catppuccin.catppuccin-vsc
+        # catppuccin.catppuccin-vsc-icons
       ];
       userSettings = {
         "window.autoDetectColorScheme" = true;
