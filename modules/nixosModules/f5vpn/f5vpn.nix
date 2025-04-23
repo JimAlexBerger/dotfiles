@@ -163,7 +163,7 @@ let
     (
       pkgs.stdenv.mkDerivation {
         pname = "f5epi-oesis-inspector";
-        version = "7090.2024.0807.1";
+        version = "7090.2024.1101.1";
 
         src = pkgs.fetchurl {
           url = "https://access.nrk.no/public/download/linux_oesisInspector.tar";
