@@ -116,7 +116,6 @@
     nh
   ];
 
-  programs.f5vpn.enable = false;
   programs.purpleExplorer.enable = true;
 
   home.sessionVariables = {
