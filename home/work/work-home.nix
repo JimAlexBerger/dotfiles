@@ -158,6 +158,11 @@
       format = "binary";
       sopsFile = ../../secrets/certs/n651227-vpn.p12;
     };
+
+    secrets."nrk_ca.crt" = {
+      format = "binary";
+      sopsFile = ../../secrets/certs/nrk_ca.crt;
+    };
   };
 
   programs.zsh = {
