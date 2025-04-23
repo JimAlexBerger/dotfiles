@@ -13,7 +13,7 @@ let
           hash = "sha256-FgqPDg4FigZvNvka802CG4jZGc51boZsA83+T2cLAQU=";
         };
 
-        nativeBuildInputs = with pkgs; [ dpkg binutils libcap patchelf ];
+        nativeBuildInputs = with pkgs; [ dpkg binutils libcap makeWrapper patchelf autoPatchelfHook qt6.wrapQtAppsHook ];
         buildInputs = with pkgs; [
           dbus
           fontconfig
@@ -29,14 +29,18 @@ let
           xorg.libXcursor
           xorg.libXext
           xorg.libXi
+          libglvnd
           libxkbcommon
           libxml2
+          qt6.qtbase
           xorg.libXrender
           libxslt
           mesa
           sqlite
           zlib
         ];
+
+        dontWrapQtApps = true;
 
         installPhase = ''
           mkdir -p $out/opt/f5/vpn
@@ -51,12 +55,22 @@ let
           mkdir -p $out/share/dbus-1/services
           ln -s $out/opt/f5/vpn/com.f5.f5vpn.service $out/share/dbus-1/services/com.f5.f5vpn.service
 
-          patchelf --add-rpath $out/opt/f5/vpn/lib $out/opt/f5/vpn/f5vpn
-          patchelf --add-rpath $out/opt/f5/vpn/platforms $out/opt/f5/vpn/f5vpn
+          patchelf \
+            --add-rpath $out/opt/f5/vpn/lib \
+            --add-rpath $out/opt/f5/vpn/platforms \
+            --add-needed libdbus-1.so \
+            --add-needed libqxcb.so \
+            --add-needed libXcursor.so \
+            $out/opt/f5/vpn/f5vpn
+        '';
+
+        preFixup = ''
+          wrapQtApp "$out/bin/f5vpn" --set QT_XKB_CONFIG_ROOT ${pkgs.xkeyboard_config}/share/X11/xkb
         '';
 
         postFixup = ''
           substituteInPlace $out/opt/f5/vpn/com.f5.f5vpn.service $out/opt/f5/vpn/com.f5.f5vpn.desktop --replace-fail "/opt/f5/vpn/f5vpn" $out/bin/f5vpn
+          substituteInPlace $out/opt/f5/vpn/com.f5.f5vpn.desktop --replace-fail "DBusActivatable=true" "DBusActivatable=fail"
         '';
       }
     );
@@ -80,6 +94,8 @@ let
           gnused
           makeWrapper
           patchelf
+          autoPatchelfHook
+          qt6.wrapQtAppsHook
           desktop-file-utils
         ];
         buildInputs = with pkgs; [
@@ -101,11 +117,15 @@ let
           libxkbcommon
           libxml2
           libxslt
+          libglvnd
+          qt6.qtbase
           mesa
           sqlite
           zlib
           xkeyboard_config
         ];
+
+        dontWrapQtApps = true;
 
         installPhase = ''
           mkdir -p $out/opt/f5/epi
@@ -120,12 +140,22 @@ let
           mkdir -p $out/share/dbus-1/services
           ln -s $out/opt/f5/epi/com.f5.f5epi.service $out/share/dbus-1/services/com.f5.f5epi.service
 
-          patchelf --add-rpath $out/opt/f5/epi/lib $out/opt/f5/epi/f5epi
-          patchelf --add-rpath $out/opt/f5/epi/platforms $out/opt/f5/epi/f5epi
+          patchelf \
+            --add-rpath $out/opt/f5/epi/lib \
+            --add-rpath $out/opt/f5/epi/platforms \
+            --add-needed libdbus-1.so \
+            --add-needed libqxcb.so \
+            --add-needed libXcursor.so \
+            $out/opt/f5/epi/f5epi
+        '';
+
+        preFixup = ''
+          wrapQtApp "$out/bin/f5epi" --set QT_XKB_CONFIG_ROOT ${pkgs.xkeyboard_config}/share/X11/xkb
         '';
 
         postFixup = ''
           substituteInPlace $out/opt/f5/epi/com.f5.f5epi.service $out/opt/f5/epi/com.f5.f5epi.desktop --replace-fail "/opt/f5/epi/f5epi" $out/bin/f5epi
+          substituteInPlace $out/opt/f5/epi/com.f5.f5epi.desktop --replace-fail "DBusActivatable=true" "DBusActivatable=fail"
         '';
       }
     );
@@ -145,9 +175,11 @@ let
           coreutils
           findutils
           patchelf
+          autoPatchelfHook
         ];
         buildInputs = with pkgs; [
           glibc
+          gcc-unwrapped
         ];
 
         dontUnpack = true;
@@ -185,6 +217,8 @@ in
 
     environment.systemPackages = [ f5vpn f5epi oesis ];
 
+    services.dbus.packages = [ f5vpn f5epi ];
+
     security.wrappers = {
       svpn = {
         source = "${f5vpn}/opt/f5/vpn/svpn";
@@ -194,7 +228,7 @@ in
       };
 
       f5vpn = {
-        source = "${f5vpn}/opt/f5/vpn/f5vpn";
+        source = "${f5vpn}/bin/f5vpn";
         owner = "root";
         group = "root";
         capabilities = "cap_kill+ep";
@@ -211,6 +245,7 @@ in
       "L+ /opt/f5/epi/f5epi - - - - ${f5epi}/opt/f5/epi/f5epi"
       "L+ /opt/f5/epi/f5PolicyServer - - - - ${f5epi}/opt/f5/epi/f5PolicyServer"
 
+      "d /home/${cfg.oesisUser}/.F5Networks 0755 ${cfg.oesisUser} users -"
       "L+ /home/${cfg.oesisUser}/.F5Networks/Inspectors - - - - ${oesis}"
     ];
 
