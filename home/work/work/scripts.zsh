@@ -33,3 +33,12 @@ find_potion () {
 origo () {
     curl -s "https://origo-service-discovery.kubeint.nrk.no/rule?url=$1" | jq -r '.links[] | "\(.title)\t\(.href)"' | fzf --with-nth=1 --bind 'ctrl-x:execute:less {-1}' | awk -F'\t' '{print $2}' | xargs firefox -new-tab
 }
+
+bruteforce () {
+    while [ $(curl -s "http://maodadist03:1953/ingesters/globalconnect" | jq -r '.current.pendingJobs') -ge 50 ]
+    do
+        sleep 0.5
+    done
+    sleep 0.1
+    curl -s -X POST "http://maodadist03:1953/queues/ps/programs/$1?priority=1"
+}
