@@ -25,9 +25,13 @@
     nixgl = {
       url = "github:nix-community/nixGL";
     };
+    nrk-nix = {
+      url = "git+ssh://git@github.com/nrkno/linux-hylla.git?ref=feature/nix-f5vpn";
+      inputs.nrk-nix.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, disko, nixgl, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, disko, nixgl, nrk-nix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -45,7 +49,7 @@
         nrklx75718-vm = lib.nixosSystem {
           inherit system;
           modules = [
-            ./modules/nixosModules
+            nrk-nix.nixosModules
             ./machines/work/configuration.nix
           ];
         };
