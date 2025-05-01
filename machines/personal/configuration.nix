@@ -6,8 +6,7 @@
 
 {
   imports =
-    [
-      # Include the results of the hardware scan.
+    [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -40,13 +39,13 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "no";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Configure console keymap
@@ -55,9 +54,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -80,7 +77,7 @@
     isNormalUser = true;
     description = "Jim-Alexander Berger Seterdahl";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [ ];
+    packages = [];
   };
 
   # Allow unfree packages
@@ -92,15 +89,21 @@
     git
     wget
     steam
+    mullvad-vpn
+    wine
+    winetricks
+    cdemu-client
+    cdemu-daemon
   ];
+
+  programs.cdemu.enable = true;
 
   programs.steam.enable = true;
 
   # Enable OpenGL
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   hardware.nvidia = {
@@ -128,12 +131,15 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
+	  # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  services.mullvad-vpn.enable = true;
+  # networking.resolvconf.enable = false;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

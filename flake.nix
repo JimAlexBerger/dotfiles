@@ -27,7 +27,7 @@
     };
     nrk-nix = {
       url = "git+ssh://git@github.com/nrkno/linux-hylla.git?ref=feature/nix-f5vpn";
-      inputs.nrk-nix.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
