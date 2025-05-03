@@ -31,6 +31,8 @@
     unzip
     remmina
     github-cli
+    spotify
+    pavucontrol
 
     nh
   ];

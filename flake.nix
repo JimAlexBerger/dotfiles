@@ -42,9 +42,9 @@
     in
     {
       nixosConfigurations = {
-        nixos = lib.nixosSystem {
+        aurvandil = lib.nixosSystem {
           inherit system;
-          modules = [ ./machines/personal/configuration.nix ];
+          modules = [ ./machines/personal/aurvandil/configuration.nix ];
         };
         nrklx75718-vm = lib.nixosSystem {
           inherit system;
