@@ -29,9 +29,11 @@
       url = "git+ssh://git@github.com/nrkno/linux-hylla.git?ref=feature/nix-f5vpn";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, disko, nixgl, nrk-nix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -44,7 +46,20 @@
       nixosConfigurations = {
         aurvandil = lib.nixosSystem {
           inherit system;
-          modules = [ ./machines/personal/aurvandil/configuration.nix ];
+          specialArgs = { inherit inputs; };
+          modules = [ 
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.jimalexberger = {
+                imports = [ ./home/personal/home.nix ];
+              };
+            }
+            ./machines/personal/aurvandil/configuration.nix 
+          ];
         };
         nrklx75718-vm = lib.nixosSystem {
           inherit system;
@@ -67,6 +82,7 @@
         jimalexberger = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            stylix.homeManagerModules.stylix
             ./home/personal/home.nix
           ];
         };

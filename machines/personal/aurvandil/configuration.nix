@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -20,7 +20,6 @@
   programs.zsh.enable = true;
 
   networking.hostName = "aurvandil"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -39,8 +38,25 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    # set the flake package
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
+
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    image = pkgs.fetchurl {
+      url = "https://www.pixelstalk.net/wp-content/uploads/image12/Spring-picturesque-village-image.jpg";
+      sha256 = "hpO1AAAy6/1L8cxPE/CawSsF1iFoAuE3b6Gsl6RP8e4=";
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -87,7 +103,12 @@
     winetricks
     cdemu-client
     cdemu-daemon
+    spotify
+    hyprpaper
+    
   ];
+
+  services.spotifyd.enable = true;
 
   programs.cdemu.enable = true;
 
@@ -135,6 +156,10 @@
  
   system.stateVersion = "23.11"; 
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
 }

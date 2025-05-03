@@ -31,11 +31,24 @@
     unzip
     remmina
     github-cli
-    spotify
     pavucontrol
+    wofi
+    kdePackages.dolphin
 
     nh
   ];
+
+  programs.kitty.enable = true;
+  programs.btop.enable = true;
+  programs.fastfetch.enable = true;
+  programs.hyprlock.enable = true;
+
+  services.hyprpaper.enable = true;
+  stylix = {
+    autoEnable = true;
+    targets.hyprpaper.enable = true;
+  };
+
 
   home.sessionVariables = {
     NH_FLAKE = "/home/jimalexberger/.dotfiles";
