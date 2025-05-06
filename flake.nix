@@ -12,10 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix.url = "github:Mic92/sops-nix";
     disko = {
       url = "github:nix-community/disko";
@@ -62,7 +58,9 @@
         };
         nrklx75718-vm = lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
+            stylix.nixosModules.stylix
             nrk-nix.nixosModules
             ./machines/work/configuration.nix
           ];
@@ -90,8 +88,10 @@
           modules = [
             plasma-manager.homeManagerModules.plasma-manager
             stylix.homeManagerModules.stylix
+            spicetify-nix.homeManagerModules.default
+            sops-nix.homeManagerModules.sops
             ./modules/homeManagerModules
-            (import ./home/work/work-home.nix inputs)
+            ./home/work/work-home.nix
           ];
         };
       };

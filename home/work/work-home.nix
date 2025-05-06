@@ -1,12 +1,10 @@
-{ spicetify-nix, sops-nix, stylix, ... }:
 { config, pkgs, ... }:
+
 {
   home.username = "n651227";
   home.homeDirectory = "/home/n651227";
 
   imports = [
-    spicetify-nix.homeManagerModules.default
-    sops-nix.homeManagerModules.sops
     ./plasma/plasma-work.nix
   ];
 
@@ -115,7 +113,15 @@
     nix-output-monitor
     nh
     traceroute
+    wofi
   ];
+
+  programs.kitty.enable = true;
+  programs.btop.enable = true;
+  programs.fastfetch.enable = true;
+
+  programs.hyprlock.enable = true;
+  services.hyprpaper.enable = true;
 
   programs.purpleExplorer.enable = true;
 
@@ -277,36 +283,6 @@
     }));
   };
 
-  programs.spicetify =
-    let
-      spicePkgs = spicetify-nix.legacyPackages.${pkgs.system};
-    in
-    {
-      enable = true;
-      enabledExtensions = with spicePkgs.extensions; [
-        hidePodcasts
-        shuffle
-        lastfm
-        (
-          {
-            src = pkgs.fetchFromGitHub {
-              owner = "BlafKing";
-              repo = "spicetify-cat-jam-synced";
-              rev = "e7bfd49fcc13457bbc98e696294cf5cf43eb6c31";
-              hash = "sha256-pyYa5i/gmf01dkEF9I2awrTGLqkAjV9edJBsThdFRv8=";
-            };
-            name = "marketplace/cat-jam.js";
-          }
-        )
-      ];
-      enabledCustomApps = with spicePkgs.apps; [
-        lyricsPlus
-        reddit
-        marketplace
-        betterLibrary
-      ];
-    };
-
   programs.firefox = {
     enable = true;
   };
@@ -331,6 +307,11 @@
     enable = true;
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+
+    image = pkgs.fetchurl {
+      url = "https://www.pixelstalk.net/wp-content/uploads/image12/Spring-picturesque-village-image.jpg";
+      sha256 = "hpO1AAAy6/1L8cxPE/CawSsF1iFoAuE3b6Gsl6RP8e4=";
+    };
 
     cursor = {
       package = pkgs.bibata-cursors;
@@ -377,6 +358,7 @@
     polarity = "dark";
 
     targets.firefox.profileNames = [ "default" ];
+    targets.hyprpaper.enable = true;
   };
 
   #programs.kitty = {
