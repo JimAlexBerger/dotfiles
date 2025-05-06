@@ -1,4 +1,4 @@
-{ spicetify-nix, sops-nix, ... }:
+{ spicetify-nix, sops-nix, stylix, ... }:
 { config, pkgs, ... }:
 {
   home.username = "n651227";
@@ -114,12 +114,13 @@
     google-cloud-sdk
     nix-output-monitor
     nh
+    traceroute
   ];
 
   programs.purpleExplorer.enable = true;
 
   home.sessionVariables = {
-    FLAKE = "/home/n651227/repos/dotfiles";
+    NH_FLAKE = "/home/n651227/repos/dotfiles";
   };
 
   sops = {
@@ -304,24 +305,7 @@
         marketplace
         betterLibrary
       ];
-      theme = spicePkgs.themes.catppuccin;
-      colorScheme = "frappe";
     };
-
-
-  catppuccin = {
-    enable = true;
-    flavor = "frappe";
-    accent = "blue";
-
-    zsh-syntax-highlighting.enable = true;
-
-    cursors = {
-      enable = true;
-      flavor = "frappe";
-      accent = "blue";
-    };
-  };
 
   programs.firefox = {
     enable = true;
@@ -341,6 +325,58 @@
       enter_accept = false;
       update_check = false;
     };
+  };
+
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 10;
+    };
+
+    fonts = {
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
+
+    fonts.sizes = {
+      applications = 10;
+      terminal = 10;
+      desktop = 10;
+      popups = 10;
+    };
+
+    opacity = {
+      applications = 1.0;
+      terminal = 1.0;
+      desktop = 1.0;
+      popups = 1.0;
+    };
+
+    polarity = "dark";
+
+    targets.firefox.profileNames = [ "default" ];
   };
 
   #programs.kitty = {

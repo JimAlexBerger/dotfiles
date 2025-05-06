@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
-    catppuccin.url = "github:catppuccin/nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +32,7 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, catppuccin, spicetify-nix, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, spicetify-nix, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -47,7 +46,7 @@
         aurvandil = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ 
+          modules = [
             stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
@@ -58,7 +57,7 @@
                 imports = [ ./home/personal/home.nix ];
               };
             }
-            ./machines/personal/aurvandil/configuration.nix 
+            ./machines/personal/aurvandil/configuration.nix
           ];
         };
         nrklx75718-vm = lib.nixosSystem {
@@ -89,8 +88,8 @@
         n651227 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            catppuccin.homeModules.catppuccin
             plasma-manager.homeManagerModules.plasma-manager
+            stylix.homeManagerModules.stylix
             ./modules/homeManagerModules
             (import ./home/work/work-home.nix inputs)
           ];

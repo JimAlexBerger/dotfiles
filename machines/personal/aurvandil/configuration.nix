@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -86,7 +87,7 @@
     isNormalUser = true;
     description = "Jim-Alexander Berger Seterdahl";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [];
+    packages = [ ];
   };
 
   # Allow unfree packages
@@ -105,7 +106,7 @@
     cdemu-daemon
     spotify
     hyprpaper
-    
+
   ];
 
   services.spotifyd.enable = true;
@@ -145,7 +146,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	  # accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -153,13 +154,13 @@
   };
 
   services.mullvad-vpn.enable = true;
- 
-  system.stateVersion = "23.11"; 
+
+  system.stateVersion = "23.11";
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
 }

@@ -10,7 +10,7 @@
 
   home.packages = with pkgs; [
     hello
-    cowsay    
+    cowsay
     alacritty
     neofetch
     tldr
