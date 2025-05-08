@@ -28,7 +28,7 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, spicetify-nix, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -88,7 +88,6 @@
           modules = [
             plasma-manager.homeManagerModules.plasma-manager
             stylix.homeManagerModules.stylix
-            spicetify-nix.homeManagerModules.default
             sops-nix.homeManagerModules.sops
             ./modules/homeManagerModules
             ./home/work/work-home.nix
