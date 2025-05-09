@@ -1,12 +1,16 @@
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    pulsemixer
+  ];
+
   programs.waybar.enable = true;
 
   programs.waybar.settings = {
     mainBar = {
       modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
       modules-center = [ "clock" ];
-      modules-right = [ "tray" "network" "battery" ];
+      modules-right = [ "tray" "network" "pulseaudio" "battery" "custom/shutdown" ];
 
       layer = "top";
       position = "top";
@@ -23,11 +27,25 @@
       };
 
       "network" = {
-        format-wifi = "{essid} ({signalStrength}%) ";
-        format-ethernet = "{ifname} ";
-        format-disconnected = "";
+        format-wifi = "";
+        format-ethernet = "";
+        format-disconnected = "";
+        tooltip-format-wifi = "{essid}: {ipaddr}/{cidr} ({signalStrength}%)";
+        tooltip-format-ethernet = "{ifname}: {ipaddr}/{cidr}";
+        tooltip-format-disconnected = "Disconnected";
         max-length = 100;
         on-click = "kitty -e 'nmtui'";
+      };
+
+      "pulseaudio" = {
+        format = "{icon}";
+        format-muted = "";
+        format-icons = {
+          default = [ "" "" ];
+        };
+        tooltip = true;
+        tooltip-format = "{desc}: {volume}%";
+        on-click = "kitty -e 'pulsemixer'";
       };
 
       "battery" = {
@@ -39,6 +57,11 @@
         format-icons = [ "" "" "" "" "" ];
         tooltip = true;
         tooltip-format = "{capacity}% : {timeTo}";
+      };
+
+      "custom/shutdown" = {
+        format = "";
+        on-click = "poweroff";
       };
     };
   };
