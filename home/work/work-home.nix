@@ -5,7 +5,8 @@
   home.homeDirectory = "/home/n651227";
 
   imports = [
-    ./plasma/plasma-work.nix
+    ../desktop-environments/hyprland/hyprland.nix
+    ../config/waybar.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
@@ -63,6 +64,8 @@
     wl-clipboard
     nerd-fonts.fantasque-sans-mono
     nerd-fonts.jetbrains-mono
+    noto-fonts-emoji
+    dejavu_fonts
     anki
     teams-for-linux
     bc
@@ -114,14 +117,13 @@
     nh
     traceroute
     wofi
+    kdePackages.konsole
+    nerdfix
   ];
 
-  programs.kitty.enable = true;
+  # programs.kitty.enable = true;
   programs.btop.enable = true;
   programs.fastfetch.enable = true;
-
-  programs.hyprlock.enable = true;
-  services.hyprpaper.enable = true;
 
   programs.purpleExplorer.enable = true;
 
@@ -275,14 +277,6 @@
     '';
   };
 
-  programs.alacritty = {
-    enable = true;
-    package = (pkgs.alacritty.overrideAttrs (old: {
-      buildInputs = old.buildInputs ++ [ pkgs.wayland pkgs.pkg-config ];
-      enableWayland = true;
-    }));
-  };
-
   programs.firefox = {
     enable = true;
   };
@@ -309,8 +303,8 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
 
     image = pkgs.fetchurl {
-      url = "https://www.pixelstalk.net/wp-content/uploads/image12/Spring-picturesque-village-image.jpg";
-      sha256 = "hpO1AAAy6/1L8cxPE/CawSsF1iFoAuE3b6Gsl6RP8e4=";
+      url = "https://pb.wallpaperlossless.com/api/files/wallpapers/20kiu9i8s25xpoe/water_city_8kkywrc729_n56xoqkeuk.png";
+      sha256 = "wo2nqz58B2tgY/3YrWNkmj2ZN/0uOgXBdxzdbPtUR78=";
     };
 
     cursor = {
@@ -331,8 +325,8 @@
       };
 
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
+        package = pkgs.nerd-fonts.hack;
+        name = "Hack Nerd Font";
       };
 
       emoji = {
@@ -358,16 +352,7 @@
     polarity = "dark";
 
     targets.firefox.profileNames = [ "default" ];
-    targets.hyprpaper.enable = true;
   };
-
-  #programs.kitty = {
-  #  enable = true;
-  #  package = "";
-  #  font.name = "JetBrainsMono";
-  #  shellIntegration.enableZshIntegration = true;
-  #  themeFile = "Catppuccin-Frappe";
-  #};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

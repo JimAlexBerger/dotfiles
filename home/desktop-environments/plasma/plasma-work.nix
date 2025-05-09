@@ -8,6 +8,7 @@
     kdePackages.plasma-browser-integration
   ];
 
+  # need plasma manager...
   programs.plasma = {
     enable = true;
     overrideConfig = true;

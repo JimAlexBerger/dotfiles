@@ -7,11 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
     sops-nix.url = "github:Mic92/sops-nix";
     disko = {
       url = "github:nix-community/disko";
@@ -28,7 +23,7 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -86,7 +81,6 @@
         n651227 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            plasma-manager.homeManagerModules.plasma-manager
             stylix.homeManagerModules.stylix
             sops-nix.homeManagerModules.sops
             ./modules/homeManagerModules
