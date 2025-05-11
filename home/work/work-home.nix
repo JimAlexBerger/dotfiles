@@ -304,8 +304,8 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
 
     image = pkgs.fetchurl {
-      url = "https://pb.wallpaperlossless.com/api/files/wallpapers/20kiu9i8s25xpoe/water_city_8kkywrc729_n56xoqkeuk.png";
-      sha256 = "wo2nqz58B2tgY/3YrWNkmj2ZN/0uOgXBdxzdbPtUR78=";
+      url = "https://w.wallhaven.cc/full/d8/wallhaven-d8xpxo.jpg";
+      sha256 = "sha256-TQryBkLHNqnYoeya4lYPCE2D4qhj3okB3bSfuN2Fkn0=";
     };
 
     cursor = {
