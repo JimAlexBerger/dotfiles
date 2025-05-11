@@ -121,7 +121,11 @@
     nerdfix
   ];
 
-  # programs.kitty.enable = true;
+  programs.kitty = {
+    enable = true;
+    package = pkgs.emptyDirectory; # Force settings to be handled by home manager, but installation of package from arch / nixos
+  };
+
   programs.btop.enable = true;
   programs.fastfetch.enable = true;
 
@@ -220,9 +224,6 @@
         # catppuccin.catppuccin-vsc-icons
       ];
       userSettings = {
-        "window.autoDetectColorScheme" = true;
-        "workbench.preferredDarkColorTheme" = "Catppuccin Frappé";
-        "workbench.iconTheme" = "catppuccin-frappe";
         "git.enableSmartCommit" = "true";
       };
     };

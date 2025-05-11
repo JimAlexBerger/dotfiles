@@ -105,7 +105,7 @@
       "$mainMod" = "SUPER";
       bind =
         [
-          "$mainMod, Q, exec, konsole"
+          "$mainMod, Q, exec, kitty"
           "$mainMod, C, killactive"
           "$mainMod, R, exec, wofi --show drun"
           "$mainMod, L, exec, hyprlock"
@@ -131,7 +131,7 @@
             10)
         );
       bindm = [
-        "$mainMod, mouse:272, movewindows"
+        "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
       bindel = [

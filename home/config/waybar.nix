@@ -62,6 +62,7 @@
       "custom/shutdown" = {
         format = "";
         on-click = "poweroff";
+        tooltip = false;
       };
     };
   };
@@ -106,18 +107,11 @@
     }
 
     #clock,
-    #battery,
-    #cpu,
-    #memory,
-    #temperature,
+    #tray,
     #network,
     #pulseaudio,
-    #custom-media,
-    #tray,
-    #mode,
-    #custom-power,
-    #custom-menu,
-    #idle_inhibitor {
+    #battery,
+    #custom-shutdown {
         padding: 0 10px;
     }
 
