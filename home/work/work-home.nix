@@ -7,6 +7,7 @@
   imports = [
     ../desktop-environments/hyprland/hyprland.nix
     ../config/waybar.nix
+    ./freerdp.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
@@ -311,7 +312,7 @@
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
-      size = 10;
+      size = 15;
     };
 
     fonts = {
