@@ -196,7 +196,7 @@
       unsetopt BEEP
     '';
 
-    initExtra = ''
+    initContent = ''
       source ${./work/scripts.zsh}
       export VAULT_ADDR='https://vault.nrk.cloud:8200'
       export TEST_SECRET=$(cat ${config.sops.secrets.test_secret.path})
