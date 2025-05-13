@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     hyprpaper
     hyprlock
+    hyprshot
   ];
 
   # Hyprpaper
@@ -103,12 +104,17 @@
         };
       };
       "$mainMod" = "SUPER";
+      "$shiftMod" = "SUPER_SHIFT";
       bind =
         [
           "$mainMod, Q, exec, kitty"
           "$mainMod, C, killactive"
           "$mainMod, R, exec, wofi --show drun"
           "$mainMod, L, exec, hyprlock"
+
+          "$mainMod, PRINT, exec, hyprshot -m window"
+          ", PRINT, exec, hyprshot -m output"
+          "$shiftMod, PRINT, exec, hyprshot -m region"
 
           "$mainMod, left, movefocus, l"
           "$mainMod, right, movefocus, r"

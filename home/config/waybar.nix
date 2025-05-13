@@ -1,7 +1,48 @@
 { config, pkgs, ... }:
+let
+  oddjob-health = serverUrl: numNodes: icon:
+    pkgs.writeShellApplication {
+      name = "waybar-oddjob";
+      runtimeInputs = with pkgs; [ pbm jq curl ];
+      text = ''
+        pbm=$(pbm ${serverUrl}:9121 cluster show)
+        num=$(echo "$pbm" | tail -n 1 | cut -d ' ' -f2)
+        if [[ "$num" -eq ${numNodes} ]]; then
+          status=ok
+          tooltip=OK
+        else
+          status=error
+          tooltip="$pbm"
+        fi
+
+        health=$(curl -s "${serverUrl}:1953/health" | jq -r '.statusMessage' )
+
+        if [[ "$health" != "null" ]]; then
+          status=error
+          if [[ "$tooltip" == "OK" ]]; then
+            tooltip="$health"
+          else
+            tooltip="$tooltip \n$health"
+          fi
+        fi
+
+        json=$(jq --unbuffered --compact-output -n \
+          --arg text "${icon}" \
+          --arg tooltip "$tooltip" \
+          --arg class "$status" \
+          '{"text":$text,"tooltip":$tooltip,"class":$class}')
+
+        echo "$json"
+      '';
+    };
+  waybar-oddjob-prod = oddjob-health "maodadist03" "15" "󰰙";
+  waybar-oddjob-stage = oddjob-health "maodadiststg03" "10" "󰰢";
+  waybar-oddjob-test = oddjob-health "maodatest01" "10" "󰰥";
+in
 {
   home.packages = with pkgs; [
     pulsemixer
+    waybar-oddjob-prod
   ];
 
   programs.waybar.enable = true;
@@ -10,7 +51,7 @@
     mainBar = {
       modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
       modules-center = [ "clock" ];
-      modules-right = [ "tray" "network" "pulseaudio" "battery" "custom/shutdown" ];
+      modules-right = [ "tray" "custom/oddjob-test" "custom/oddjob-stage" "custom/oddjob-prod" "network" "pulseaudio" "battery" "custom/shutdown" ];
 
       layer = "top";
       position = "top";
@@ -24,6 +65,27 @@
       "tray" = {
         icon-size = 15;
         spacing = 10;
+      };
+
+      "custom/oddjob-test" = {
+        exec = "${waybar-oddjob-test}/bin/waybar-oddjob";
+        # exec-if = "${(pkgs.writeShellScript "waybar-oddjob-if-prod" ''${pkgs.curl}/bin/curl -s -o /dev/null "maodadist03"'') }/bin/waybar-oddjob-if-prod";
+        return-type = "json";
+        interval = 120;
+      };
+
+      "custom/oddjob-stage" = {
+        exec = "${waybar-oddjob-stage}/bin/waybar-oddjob";
+        # exec-if = "${(pkgs.writeShellScript "waybar-oddjob-if-prod" ''${pkgs.curl}/bin/curl -s -o /dev/null "maodadist03"'') }/bin/waybar-oddjob-if-prod";
+        return-type = "json";
+        interval = 120;
+      };
+
+      "custom/oddjob-prod" = {
+        exec = "${waybar-oddjob-prod}/bin/waybar-oddjob";
+        # exec-if = "${(pkgs.writeShellScript "waybar-oddjob-if-prod" ''${pkgs.curl}/bin/curl -s -o /dev/null "maodadist03"'') }/bin/waybar-oddjob-if-prod";
+        return-type = "json";
+        interval = 60;
       };
 
       "network" = {
@@ -108,11 +170,26 @@
 
     #clock,
     #tray,
+    #custom-oddjob-test,
+    #custom-oddjob-stage,
+    #custom-oddjob-prod,
     #network,
     #pulseaudio,
     #battery,
     #custom-shutdown {
         padding: 0 10px;
+    }
+
+    #custom-oddjob-test.error {
+        color: @base08;
+    }
+
+    #custom-oddjob-stage.error {
+        color: @base08;
+    }
+
+    #custom-oddjob-prod.error {
+        color: @base08;
     }
 
     #battery.charging {
