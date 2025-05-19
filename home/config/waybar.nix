@@ -7,23 +7,18 @@ let
       text = ''
         pbm=$(pbm ${serverUrl}:9121 cluster show)
         num=$(echo "$pbm" | tail -n 1 | cut -d ' ' -f2)
+        tooltip="$pbm"
         if [[ "$num" -eq ${numNodes} ]]; then
           status=ok
-          tooltip=OK
         else
           status=error
-          tooltip="$pbm"
         fi
 
         health=$(curl -s "${serverUrl}:1953/health" | jq -r '.statusMessage' )
 
         if [[ "$health" != "null" ]]; then
           status=error
-          if [[ "$tooltip" == "OK" ]]; then
-            tooltip="$health"
-          else
-            tooltip="$tooltip \n$health"
-          fi
+          tooltip="$tooltip \n$health"
         fi
 
         json=$(jq --unbuffered --compact-output -n \
@@ -200,6 +195,10 @@ in
     }
     #battery.critical:not(.charging) {
         color: @base08;
+    }
+
+    tooltip {
+      background-color: @base00;
     }
   '';
 

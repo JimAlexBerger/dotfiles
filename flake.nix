@@ -21,9 +21,13 @@
     };
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, disko, nixgl, nrk-nix, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, sops-nix, disko, nixgl, nrk-nix, stylix, nixvim, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -74,15 +78,16 @@
         jimalexberger = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
             ./home/personal/home.nix
           ];
         };
         n651227 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
             sops-nix.homeManagerModules.sops
+            nixvim.homeManagerModules.nixvim
             ./modules/homeManagerModules
             ./home/work/work-home.nix
           ];

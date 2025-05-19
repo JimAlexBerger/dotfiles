@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     hyprpaper
-    hyprlock
     hyprshot
   ];
 
@@ -11,7 +10,10 @@
   stylix.targets.hyprpaper.enable = true;
 
   # Hyprlock
-  programs.hyprlock.enable = true;
+  programs.hyprlock = {
+    enable = true;
+    package = null;
+  };
 
   # Hyprland
   wayland.windowManager.hyprland = {
