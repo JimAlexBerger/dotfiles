@@ -105,6 +105,9 @@
           natural_scroll = false;
         };
       };
+      cursor = {
+        no_hardware_cursors = 1;
+      };
       "$mainMod" = "SUPER";
       "$shiftMod" = "SUPER_SHIFT";
       bind =
