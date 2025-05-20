@@ -7,6 +7,7 @@
   imports = [
     ../desktop-environments/hyprland/hyprland.nix
     ../config/waybar.nix
+    ../config/nixvim/nixvim.nix
     ./freerdp.nix
   ];
 
@@ -80,15 +81,6 @@
     tlrc
     less
     shell-gpt
-    (pkgs.spotify-player.override {
-      withAudioBackend = "pulseaudio";
-      withStreaming = true;
-      withDaemon = true;
-      withMediaControl = true;
-      withImage = true;
-      withNotify = true;
-      withSixel = true;
-    })
     nixos-generators
     lazydocker
     atac
@@ -305,6 +297,21 @@
     enableZshIntegration = true;
   };
 
+
+
+  programs.spotify-player = {
+    enable = true;
+    package = (pkgs.spotify-player.override {
+      withAudioBackend = "pulseaudio";
+      withStreaming = true;
+      withDaemon = true;
+      withMediaControl = true;
+      withImage = true;
+      withNotify = true;
+      withSixel = true;
+    });
+  };
+
   stylix = {
     enable = true;
     autoEnable = true;
@@ -361,9 +368,6 @@
 
     targets.firefox.profileNames = [ "default" ];
   };
-
-  programs.nixvim.enable = true;
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
