@@ -161,9 +161,9 @@
       sopsFile = ../../secrets/atuin/.atuin-key;
     };
 
-    secrets."vpn-cert.p12" = {
+    secrets."vpn-cert.pfx" = {
       format = "binary";
-      sopsFile = ../../secrets/certs/n651227-vpn.p12;
+      sopsFile = ../../secrets/certs/n651227-vpn.pfx;
     };
 
     secrets."nrk_ca.crt" = {
