@@ -10,6 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+  nix.package = pkgs.lix;
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -54,9 +55,11 @@
   stylix = {
     enable = true;
     autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+
     image = pkgs.fetchurl {
-      url = "https://www.pixelstalk.net/wp-content/uploads/image12/Spring-picturesque-village-image.jpg";
-      sha256 = "hpO1AAAy6/1L8cxPE/CawSsF1iFoAuE3b6Gsl6RP8e4=";
+      url = "https://w.wallhaven.cc/full/d8/wallhaven-d8xpxo.jpg";
+      sha256 = "sha256-TQryBkLHNqnYoeya4lYPCE2D4qhj3okB3bSfuN2Fkn0=";
     };
   };
 
