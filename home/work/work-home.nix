@@ -103,7 +103,6 @@
     kubectl
     kubectx
     k9s
-    direnv
     pulsemixer
     google-cloud-sdk
     nix-output-monitor
@@ -113,6 +112,8 @@
     kdePackages.konsole
     nerdfix
     imagemagick
+    jaq
+    bat
   ];
 
   programs.kitty = {
@@ -310,6 +311,11 @@
       withNotify = true;
       withSixel = true;
     });
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   stylix = {
