@@ -104,5 +104,6 @@
           ];
         };
       };
+      packages.${system}.pomodoro-cli = pkgs.callPackage ./modules/applications/pomodoro-cli.nix { };
     };
 }

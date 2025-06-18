@@ -114,6 +114,7 @@
     imagemagick
     jaq
     bat
+    (callPackage ../../modules/applications/pomodoro-cli.nix { })
   ];
 
   programs.kitty = {

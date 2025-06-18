@@ -30,6 +30,7 @@ let
         echo "$json"
       '';
     };
+  pomodoro-cli = pkgs.callPackage ../../modules/applications/pomodoro-cli.nix { };
   waybar-oddjob-prod = oddjob-health "maodadist03" "15" "󰰙";
   waybar-oddjob-stage = oddjob-health "maodadiststg03" "10" "󰰢";
   waybar-oddjob-test = oddjob-health "maodatest01" "10" "󰰥";
@@ -46,7 +47,7 @@ in
     mainBar = {
       modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
       modules-center = [ "clock" ];
-      modules-right = [ "tray" "custom/oddjob-test" "custom/oddjob-stage" "custom/oddjob-prod" "network" "pulseaudio" "battery" "custom/shutdown" ];
+      modules-right = [ "tray" "custom/oddjob-test" "custom/oddjob-stage" "custom/oddjob-prod" "custom/pomodoro" "network" "pulseaudio" "battery" "custom/shutdown" ];
 
       layer = "top";
       position = "top";
@@ -81,6 +82,12 @@ in
         # exec-if = "${(pkgs.writeShellScript "waybar-oddjob-if-prod" ''${pkgs.curl}/bin/curl -s -o /dev/null "maodadist03"'') }/bin/waybar-oddjob-if-prod";
         return-type = "json";
         interval = 60;
+      };
+
+      "custom/pomodoro" = {
+        exec = "${pomodoro-cli}/bin/pom left";
+        interval = 10;
+        on-click = "${pomodoro-cli}/bin/pom start";
       };
 
       "network" = {
@@ -154,13 +161,14 @@ in
         padding: 1px 5px;
         background-color: transparent;
     }
+    
+    #workspaces button.active {
+        background-color: @base02;
+    }
+    
     #workspaces button:hover {
         box-shadow: inherit;
         background-color: @base0D;
-    }
-
-    #workspaces button.focused {
-        background-color: @base02;
     }
 
     #clock,
@@ -168,6 +176,7 @@ in
     #custom-oddjob-test,
     #custom-oddjob-stage,
     #custom-oddjob-prod,
+    #custom-pomodoro,
     #network,
     #pulseaudio,
     #battery,
@@ -195,6 +204,10 @@ in
     }
     #battery.critical:not(.charging) {
         color: @base08;
+    }
+
+    #custom-pomodoro {
+        background-color: @base02;
     }
 
     tooltip {
