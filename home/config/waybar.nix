@@ -56,6 +56,7 @@ in
       "custom/clock" = {
         exec = "${pkgs.uutils-coreutils}/bin/uutils-date +%H:%M:%S";
         interval = 1;
+
       };
 
       "tray" = {

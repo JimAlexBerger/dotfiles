@@ -34,11 +34,12 @@
     enable = true;
 
     locale = {
-      dateformat = "%Y-%m-%d";
-      longdateformat = "%Y-%m-%d";
-      timeformat = "%H:%M:%S";
-      datetimeformat = "%Y-%m-%dT%H:%M:%S";
-      longdatetimeformat = "%Y-%m-%dT%H:%M:%S";
+      timeformat = "%H:%M";
+      dateformat = "%d/%m/%Y";
+      longdateformat = "%d/%m/%Y";
+      datetimeformat = "%d/%m/%Y %H:%M";
+      longdatetimeformat = "%d/%m/%Y %H:%M";
+      weeknumbers = "left";
     };
   };
 
