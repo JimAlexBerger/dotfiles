@@ -324,12 +324,12 @@
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
 
-    #image = pkgs.fetchurl {
-    #  url = "https://w.wallhaven.cc/full/d8/wallhaven-d8xpxo.jpg";
-    #  sha256 = "sha256-TQryBkLHNqnYoeya4lYPCE2D4qhj3okB3bSfuN2Fkn0=";
-    #};
+    image = pkgs.fetchurl {
+      url = "https://w.wallhaven.cc/full/d8/wallhaven-d8xpxo.jpg";
+      sha256 = "sha256-TQryBkLHNqnYoeya4lYPCE2D4qhj3okB3bSfuN2Fkn0=";
+    };
 
-    image = ../desktop-environments/wallpaper/20250615_0055.jpg;
+    #image = ../desktop-environments/wallpaper/20250615_0055.jpg;
 
     cursor = {
       package = pkgs.bibata-cursors;

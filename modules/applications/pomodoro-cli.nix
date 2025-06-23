@@ -1,4 +1,4 @@
-{ lib, pkgs, buildDotnetModule, dotnetCorePackages }:
+{ pkgs, buildDotnetModule }:
 let
   pomodoro-cli =
     buildDotnetModule {

@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/fefeb0e928d1ec528f54e73892a7c069425d5041";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -20,7 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nrk-nix = {
-      url = "git+ssh://git@github.com/nrkno/linux-hylla.git?ref=feature/nix-f5vpn";
+      url = "git+ssh://git@github.com/nrkno/linux-hylla.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {

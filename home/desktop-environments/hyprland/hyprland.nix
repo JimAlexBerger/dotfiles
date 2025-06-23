@@ -26,6 +26,7 @@
         "DP-4,preferred,-2560x0,auto"
         "DP-3,preferred,auto-left,0.75"
         "HDMI-A-1,1920x1080@50,auto-right,auto, mirror, eDP-1"
+        "DP-2,preferred,auto-right,auto"
         " , preferred, auto, 1, mirror, eDP-1"
       ];
       exec-once = [
@@ -116,6 +117,10 @@
           "$mainMod, C, killactive"
           "$mainMod, R, exec, wofi --show drun"
           "$mainMod, L, exec, hyprlock"
+          "$mainMod, F, exec, firefox"
+
+          "$mainMod, P, exec, ${pkgs.callPackage ../../../modules/applications/pomodoro-cli.nix { }}/bin/pom start"
+          "$shiftMod, P, exec, ${pkgs.callPackage ../../../modules/applications/pomodoro-cli.nix { }}/bin/pom break"
 
           "$mainMod, PRINT, exec, hyprshot -m window"
           ", PRINT, exec, hyprshot -m output"
