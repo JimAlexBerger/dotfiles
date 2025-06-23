@@ -126,6 +126,8 @@
           ", PRINT, exec, hyprshot -m output"
           "$shiftMod, PRINT, exec, hyprshot -m region"
 
+          "$mainMod, Y, togglesplit"
+
           "$mainMod, left, movefocus, l"
           "$mainMod, right, movefocus, r"
           "$mainMod, up, movefocus, u"

@@ -9,6 +9,7 @@
     ../config/waybar.nix
     ../config/nixvim/nixvim.nix
     ./freerdp.nix
+    ../config/khal
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.

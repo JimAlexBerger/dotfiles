@@ -46,16 +46,16 @@ in
   programs.waybar.settings = {
     mainBar = {
       modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
-      modules-center = [ "clock" ];
+      modules-center = [ "custom/clock" ];
       modules-right = [ "tray" "custom/oddjob-test" "custom/oddjob-stage" "custom/oddjob-prod" "custom/pomodoro" "network" "pulseaudio" "battery" "custom/shutdown" ];
 
       layer = "top";
       position = "top";
       height = 26;
 
-      "clock" = {
+      "custom/clock" = {
+        exec = "${pkgs.uutils-coreutils}/bin/uutils-date +%H:%M:%S";
         interval = 1;
-        format = "{:%H:%M:%S}";
       };
 
       "tray" = {
@@ -171,7 +171,7 @@ in
         background-color: @base0D;
     }
 
-    #clock,
+    #custom-clock,
     #tray,
     #custom-oddjob-test,
     #custom-oddjob-stage,
