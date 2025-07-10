@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
     home-manager = {
-      url = "github:nix-community/home-manager/fefeb0e928d1ec528f54e73892a7c069425d5041";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {

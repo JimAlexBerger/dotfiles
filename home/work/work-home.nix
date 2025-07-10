@@ -117,6 +117,8 @@
     bat
     (callPackage ../../modules/applications/pomodoro-cli.nix { })
     vim
+    youplot
+    lazygit
   ];
 
   programs.kitty = {
@@ -256,7 +258,16 @@
       #New panes in current path
       bind '"' split-window -v -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
-
+      
+      # Display Popups
+      bind C-y display-popup \
+        -d "#{pane_current_path}" \
+        -w 80% \
+        -h 80% \
+        -E "lazygit"
+      bind C-n display-popup -E 'bash -i -c "read -p \"Session name: \" name; tmux new-session -d -s \$name && tmux switch-client -t \$name"'
+      bind C-j display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+      
       # Catppuccin status bar
       set -g @catppuccin_window_left_separator "█"
       set -g @catppuccin_window_right_separator "█ "

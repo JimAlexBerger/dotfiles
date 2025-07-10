@@ -9,15 +9,16 @@ let
         num=$(echo "$pbm" | tail -n 1 | cut -d ' ' -f2)
         tooltip="$pbm"
         if [[ "$num" -eq ${numNodes} ]]; then
-          status=ok
+          status=OK
         else
-          status=error
+          status=FAIL
         fi
 
         health=$(curl -s "${serverUrl}:1953/health" | jq -r '.statusMessage' )
+        healthstatus=$(curl -s "${serverUrl}:1953/health" | jq -r '.status' )
 
         if [[ "$health" != "null" ]]; then
-          status=error
+          status=$healthstatus
           tooltip="$tooltip \n$health"
         fi
 
@@ -185,16 +186,16 @@ in
         padding: 0 10px;
     }
 
-    #custom-oddjob-test.error {
+    #custom-oddjob-test.FAIL,
+    #custom-oddjob-stage.FAIL,
+    #custom-oddjob-prod.FAIL {
         color: @base08;
     }
 
-    #custom-oddjob-stage.error {
-        color: @base08;
-    }
-
-    #custom-oddjob-prod.error {
-        color: @base08;
+    #custom-oddjob-test.WARNING,
+    #custom-oddjob-stage.WARNING,
+    #custom-oddjob-prod.WARNING {
+        color: @base0A;
     }
 
     #battery.charging {
