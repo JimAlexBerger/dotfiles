@@ -37,7 +37,9 @@
     manix
     fzf
     vscode
-    jetbrains.rider
+    (jetbrains.rider.override {
+      jdk = jdk;
+    })
     (with dotnetCorePackages; combinePackages [
       sdk_9_0
       sdk_8_0
@@ -90,7 +92,6 @@
     obsidian
     pv
     yt-dlp
-    darktable
     age
     sops
     pre-commit
@@ -119,6 +120,10 @@
     vim
     youplot
     lazygit
+    osu-lazer-bin
+    gemini-cli
+    lazyjj
+    jjui
   ];
 
   programs.kitty = {
@@ -146,6 +151,8 @@
     secrets.NRK_GITHUB_TOKEN.path = "${config.sops.defaultSymlinkPath}/NRK_GITHUB_TOKEN";
     secrets.PHOBOS_NUGET_USERNAME.path = "${config.sops.defaultSymlinkPath}/PHOBOS_NUGET_USERNAME";
     secrets.PHOBOS_NUGET_PASSWORD.path = "${config.sops.defaultSymlinkPath}/PHOBOS_NUGET_PASSWORD";
+
+    secrets.gemini_api_key.path = "${config.sops.defaultSymlinkPath}/gemini_api_key";
 
     secrets.s3cfg-prod = {
       format = "binary";
@@ -202,6 +209,7 @@
       export NRK_GITHUB_TOKEN=$(cat ${config.sops.secrets.NRK_GITHUB_TOKEN.path})
       export PHOBOS_NUGET_USERNAME=$(cat ${config.sops.secrets.PHOBOS_NUGET_USERNAME.path})
       export PHOBOS_NUGET_PASSWORD=$(cat ${config.sops.secrets.PHOBOS_NUGET_PASSWORD.path})
+      export GEMINI_API_KEY=$(cat ${config.sops.secrets.gemini_api_key.path})
     '';
 
     oh-my-zsh = {
@@ -264,10 +272,16 @@
         -d "#{pane_current_path}" \
         -w 80% \
         -h 80% \
-        -E "lazygit"
+        -E "lazyjj"
       bind C-n display-popup -E 'bash -i -c "read -p \"Session name: \" name; tmux new-session -d -s \$name && tmux switch-client -t \$name"'
       bind C-j display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
-      
+      bind C-s display-popup \
+        -w 80% \
+        -h 80% \
+        -E "spotify_player"
+      bind C-h display-popup -E "nh home switch -b backup"
+      bind C-t display-popup -E "zsh"
+
       # Catppuccin status bar
       set -g @catppuccin_window_left_separator "█"
       set -g @catppuccin_window_right_separator "█ "
@@ -331,6 +345,8 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  programs.jujutsu.enable = true;
 
   stylix = {
     enable = true;
