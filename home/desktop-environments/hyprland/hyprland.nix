@@ -23,8 +23,8 @@
     settings = {
       monitor = [
         "eDP-1,preferred,0x0,1.25"
-        "DP-4,preferred,auto-left,auto"
-        "DP-3,preferred,auto-left,auto"
+        "desc: Dell Inc. DELL UP2716D KRXTR844438L,preferred,auto-left,auto"
+        "desc: Dell Inc. DELL U2412M YPPY06CF483U,preferred,auto-left,auto"
         "HDMI-A-1,1920x1080@50,auto-right,auto, mirror, eDP-1"
         "DP-2,preferred,auto-right,auto"
         " , preferred, auto, 1, mirror, eDP-1"

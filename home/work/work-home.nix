@@ -254,6 +254,7 @@
       tmuxPlugins.catppuccin
       tmuxPlugins.better-mouse-mode
       tmuxPlugins.yank
+      tmuxPlugins.vim-tmux-navigator
     ];
 
     extraConfig = ''
