@@ -15,8 +15,8 @@ s3cat () {
 }
 
 localcat () {
-    progidraw=$1                                                                                                                                                                                                                                               
-    progid=${progidraw:l}  # Convert to lowercase                                                                                                                                                                                                              
+    progidraw=$1
+    progid=${progidraw:l}  # Convert to lowercase
     progprefix=${progid:0:6}
     progprefix2=${progid:6:2}
     find /mnt/mediashare/$progprefix/$progprefix2/$progid | fzf --no-sort

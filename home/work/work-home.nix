@@ -5,10 +5,12 @@
   home.homeDirectory = "/home/n651227";
 
   imports = [
-    ../desktop-environments/hyprland/hyprland.nix
-    ../config/waybar.nix
-    ../config/nixvim/nixvim.nix
-    ./freerdp.nix
+    ../desktop-environments/hyprland
+
+    ./rdpwork
+
+    ../config/waybar
+    ../config/nixvim
     ../config/khal
     ../config/tmux
     ../config/stylix

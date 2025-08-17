@@ -31,7 +31,7 @@ let
         echo "$json"
       '';
     };
-  pomodoro-cli = pkgs.callPackage ../../modules/applications/pomodoro-cli.nix { };
+  pomodoro-cli = pkgs.callPackage ../../../modules/applications/pomodoro-cli.nix { };
   waybar-oddjob-prod = oddjob-health "maodadist03" "15" "󰰙";
   waybar-oddjob-stage = oddjob-health "maodadiststg03" "10" "󰰢";
   waybar-oddjob-test = oddjob-health "maodatest01" "10" "󰰥";
