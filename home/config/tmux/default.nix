@@ -61,7 +61,7 @@
     '';
   };
 
-  
+
   home.file.".config/tmuxp/develop-oddjob.yaml" = {
     source = ./develop-oddjob.yaml;
   };

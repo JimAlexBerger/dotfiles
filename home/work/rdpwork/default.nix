@@ -7,7 +7,7 @@ let
       text = ''
         bat ${config.sops.secrets.rdpservers.path} | fzf --with-nth '{1}' --delimiter , | cut -d , -f 2 | xargs -I{} xfreerdp /u:tmp651227 /d:felles /cert:tofu /v:{}
       '';
-  };
+    };
 in
 {
   home.packages = [
