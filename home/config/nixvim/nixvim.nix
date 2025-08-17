@@ -225,6 +225,9 @@
 
       # See `:help hlsearch`
       hlsearch = true;
+
+      shiftwidth = 4;
+      tabstop = 4;
     };
 
     # [[ Basic Keymaps ]]

@@ -1,0 +1,12 @@
+session_name: oddjob
+start_directory: ~/repos/distribution-oddjob/
+windows:
+- focus: 'true'
+  layout: '758c,314x83,0,0[314x54,0,0,1,314x28,0,55{202x28,0,55,2,111x28,203,55,3}]'
+  options:
+    main-pane-height: 67%
+  panes:
+    - focus: 'true'
+      shell_command: nvim .
+    - 
+    - watch --color jj log --color=always

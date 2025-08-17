@@ -97,7 +97,7 @@
           modules = [
             stylix.homeModules.stylix
             sops-nix.homeManagerModules.sops
-            nixvim.homeManagerModules.nixvim
+            nixvim.homeModules.nixvim
             ./modules/homeManagerModules
             ./home/work/work-home.nix
           ];

@@ -100,6 +100,10 @@
           enable = true;
         };
 
+        gleam = {
+          enable = true;
+        };
+
         lua_ls = {
           enable = true;
 
