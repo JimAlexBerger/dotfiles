@@ -32,8 +32,6 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    hello
-    cowsay
     neofetch
     manix
     fzf
@@ -47,7 +45,6 @@
       sdk_6_0
     ])
     s3cmd
-    slack
     remmina
     vault-bin
     terraform
@@ -74,29 +71,21 @@
     dejavu_fonts
     anki
     teams-for-linux
-    bc
     git
     github-cli
     htop
     jq
     man-db
     man-pages
-    paru
     tlrc
-    less
     shell-gpt
-    nixos-generators
     lazydocker
-    atac
     dbeaver-bin
-    sq
     obsidian
     pv
-    yt-dlp
     age
     sops
     pre-commit
-    nixos-rebuild
     mkpasswd
     element-desktop
     bluetui
@@ -112,16 +101,12 @@
     nh
     traceroute
     wofi
-    kdePackages.konsole
     nerdfix
     imagemagick
     jaq
     bat
     (callPackage ../../modules/applications/pomodoro-cli.nix { })
     vim
-    youplot
-    lazygit
-    osu-lazer-bin
     gemini-cli
     lazyjj
     jjui
