@@ -282,10 +282,8 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
 
     image = pkgs.fetchurl {
-      #url = "https://w.wallhaven.cc/full/d8/wallhaven-d8xpxo.jpg";
-      #sha256 = "sha256-TQryBkLHNqnYoeya4lYPCE2D4qhj3okB3bSfuN2Fkn0=";
-      url = "https://w.wallhaven.cc/full/9d/wallhaven-9dvwgx.jpg";
-      sha256 = "sha256-IKHEqtzvVd7UoeghkfAfFrJKkRhP6HZ0oyh5qiCliZw=";
+      url = "https://ms01.nasjonalmuseet.no/api/objects/download?filename=NG.M.00305+(2).tif&size=full";
+      sha256 = "sha256-P/ib2OK71RffqlOSr5Gnz4dHGh2GMdppUrplZ8OVM7A=";
     };
     #image = ../desktop-environments/wallpaper/20250615_0055.jpg;
 
