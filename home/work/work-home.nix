@@ -11,9 +11,9 @@
 
     ../config/waybar
     ../config/nixvim
-    ../config/khal
     ../config/tmux
     ../config/stylix
+    ../config/khal
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
@@ -31,6 +31,9 @@
   nix.settings =
     {
       extra-experimental-features = [ "nix-command" "flakes" ];
+      builders = "ssh://n651227@nrklx69109 x86_64-linux /home/n651227/.ssh/id_ed25519 - - nixos-test,big-parallel,kvm";
+      builders-use-substitutes = true;
+      trusted-users = [ "@wheel" ];
     };
 
   fonts.fontconfig.enable = true;
@@ -72,7 +75,6 @@
     nerd-fonts.jetbrains-mono
     noto-fonts-emoji
     dejavu_fonts
-    anki
     teams-for-linux
     git
     github-cli
@@ -93,7 +95,6 @@
     element-desktop
     bluetui
     nixgl.nixGLIntel
-    azure-cli
     kubelogin
     kubectl
     kubectx
@@ -111,8 +112,16 @@
     (callPackage ../../modules/applications/pomodoro-cli.nix { })
     vim
     gemini-cli
-    lazyjj
-    jjui
+    nixpkgs-review
+    nyxt
+    azure-cli
+    (pkgs.runCommand "psql" { } ''
+      mkdir -p $out/bin
+      ln -s ${pkgs.postgresql}/bin/psql $out/bin/psql
+    '')
+    darktable
+    ladybird
+    virt-manager
   ];
 
   programs.kitty = {
@@ -193,6 +202,9 @@
 
     initContent = ''
       source ${./work/scripts.zsh}
+
+      export LIBVIRT_DEFAULT_URI="qemu:///system"
+
       export VAULT_ADDR='https://vault.nrk.cloud:8200'
       export TEST_SECRET=$(cat ${config.sops.secrets.test_secret.path})
       export NRK_GITHUB_TOKEN=$(cat ${config.sops.secrets.NRK_GITHUB_TOKEN.path})
@@ -205,9 +217,31 @@
       enable = true;
       plugins = [
         "git"
+        "docker-compose"
+        "dotnet"
+        "ssh-agent"
+        "tmux"
       ];
       theme = "robbyrussell";
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.nushell = {
+    enable = true;
+    extraConfig = ''
+      $env.PATH ++= [ "~/.nix-profile/bin" ]
+    '';
+    shellAliases = {
+        ll = "ls -l";
+        s3prod = "cp ${config.sops.secrets.s3cfg-prod.path} ~/.s3cfg";
+        s3stage = "cp ${config.sops.secrets.s3cfg-stage.path} ~/.s3cfg";
+        s3test = "cp ${config.sops.secrets.s3cfg-test.path} ~/.s3cfg";
+      };
   };
 
   programs.vscode = {
@@ -275,7 +309,18 @@
     enableZshIntegration = true;
   };
 
-  programs.jujutsu.enable = true;
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        email = "jim-alexander.berger.seterdahl@nrk.no";
+        name = "Jim-Alexander Berger Seterdahl";
+      };
+      aliases = {
+        tug = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

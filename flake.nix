@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
+    nixpkgs-stable.url = "nixpkgs/nixos-25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +18,6 @@
     };
     nixgl = {
       url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     nrk-nix = {
       url = "git+ssh://git@github.com/nrkno/linux-hylla.git";
@@ -33,7 +33,6 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -41,9 +40,17 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
+      pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
+      stable-overlay =
+        final: prev: {
+          azure-cli = pkgs-stable.azure-cli;
+        };
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ nixgl.overlay ];
+        overlays = [
+          nixgl.overlay
+          stable-overlay
+        ];
       };
     in
     {
