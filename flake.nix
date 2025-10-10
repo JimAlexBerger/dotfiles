@@ -2,7 +2,7 @@
   description = "JimAlexBergers flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable"; # nixos-unstable
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable"; # nixos-unstable
     nixpkgs-stable.url = "nixpkgs/nixos-25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -18,6 +18,7 @@
     };
     nixgl = {
       url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nrk-nix = {
       url = "git+ssh://git@github.com/nrkno/linux-hylla.git";

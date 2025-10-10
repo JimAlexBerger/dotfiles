@@ -4,7 +4,7 @@ let
     pkgs.writeShellApplication {
       name = "waybar-oddjob";
       runtimeInputs = with pkgs; [ pbm jq curl ];
-      text = ''
+      text = /* bash */ ''
         pbm=$(pbm ${serverUrl}:9121 cluster show)
         num=$(echo "$pbm" | tail -n 1 | cut -d ' ' -f2)
         tooltip="$pbm"
@@ -133,7 +133,7 @@ in
     };
   };
 
-  programs.waybar.style = ''
+  programs.waybar.style = /* css */ ''
     * {
         border: none;
         color: @base07;
