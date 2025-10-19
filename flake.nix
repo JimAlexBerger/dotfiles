@@ -87,6 +87,20 @@
           modules = [
             ./machines/personal/reticulum/configuration.nix
             ./machines/personal/reticulum/hardware-configuration.nix
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.sharedModules = [
+                sops-nix.homeManagerModules.sops
+                nixvim.homeModules.nixvim
+              ];
+              home-manager.users.jimalexberger = {
+                imports = [ ./home/personal/server-user.nix ];
+              };
+            }
           ];
         };
       };

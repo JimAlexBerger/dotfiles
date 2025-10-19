@@ -46,6 +46,7 @@
     isNormalUser = true;
     description = "jim-alexander berger seterdahl";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/Mdw+B6hzwwPJ7SvUdsUB6GreZ9K7Vq03cpUCYKViU"
@@ -53,6 +54,8 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5fyEoIivr8pNPY2NlPanp3OMvDaJg7uwo3zwODVyZT"
     ];
   };
+
+  programs.zsh.enable = true;
 
   # Enable automatic login for the user.
   services.getty.autologinUser = "jimalexberger";
