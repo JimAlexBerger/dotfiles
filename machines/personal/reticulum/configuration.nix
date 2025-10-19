@@ -57,6 +57,12 @@
 
   programs.zsh.enable = true;
 
+  services.immich = {
+    enable = true;
+    port = 2283;
+    host = "0.0.0.0";
+    openFirewall = true;
+  };
   # Enable automatic login for the user.
   services.getty.autologinUser = "jimalexberger";
 
@@ -105,8 +111,8 @@
   };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 2283 ];
+  networking.firewall.allowedUDPPorts = [ 2283 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
