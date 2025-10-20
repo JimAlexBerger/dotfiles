@@ -6,10 +6,11 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -47,7 +48,7 @@
     description = "jim-alexander berger seterdahl";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/Mdw+B6hzwwPJ7SvUdsUB6GreZ9K7Vq03cpUCYKViU"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEc78BxN5BQqFa1pyQx2PqXVxxBcWtc/H64yfOSCcQmP"
@@ -77,7 +78,7 @@
     git
     gh
   ];
-  
+
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -96,8 +97,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh = { 
-    enable = true; 
+  services.openssh = {
+    enable = true;
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;

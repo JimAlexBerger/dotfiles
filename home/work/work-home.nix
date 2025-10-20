@@ -238,11 +238,11 @@
       $env.PATH ++= [ "~/.nix-profile/bin" ]
     '';
     shellAliases = {
-        ll = "ls -l";
-        s3prod = "cp ${config.sops.secrets.s3cfg-prod.path} ~/.s3cfg";
-        s3stage = "cp ${config.sops.secrets.s3cfg-stage.path} ~/.s3cfg";
-        s3test = "cp ${config.sops.secrets.s3cfg-test.path} ~/.s3cfg";
-      };
+      ll = "ls -l";
+      s3prod = "cp ${config.sops.secrets.s3cfg-prod.path} ~/.s3cfg";
+      s3stage = "cp ${config.sops.secrets.s3cfg-stage.path} ~/.s3cfg";
+      s3test = "cp ${config.sops.secrets.s3cfg-test.path} ~/.s3cfg";
+    };
   };
 
   programs.vscode = {
@@ -320,7 +320,7 @@
         name = "Jim-Alexander Berger Seterdahl";
       };
       aliases = {
-        tug = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+        tug = [ "bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-" ];
       };
     };
   };

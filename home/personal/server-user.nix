@@ -141,7 +141,7 @@
         name = "Jim-Alexander Berger Seterdahl";
       };
       aliases = {
-        tug = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+        tug = [ "bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-" ];
       };
     };
   };
