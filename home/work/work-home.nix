@@ -263,8 +263,10 @@
 
   programs.git = {
     enable = true;
-    userName = "jimalexberger";
-    userEmail = "jim-alexander.berger.seterdahl@nrk.no";
+    settings = {
+      user.name = "jimalexberger";
+      user.email = "jim-alexander.berger.seterdahl@nrk.no";
+    };
   };
 
   programs.firefox = {

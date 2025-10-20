@@ -101,8 +101,10 @@
 
   programs.git = {
     enable = true;
-    userName = "jimalexberger";
-    userEmail = "alexandergundersen@yahoo.no";
+    settings = {
+      user.name = "jimalexberger";
+      user.email = "alexandergundersen@yahoo.no";
+    };
   };
 
   programs.atuin = {
