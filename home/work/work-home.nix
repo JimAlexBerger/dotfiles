@@ -122,6 +122,7 @@
     darktable
     ladybird
     virt-manager
+    immich-cli
   ];
 
   programs.kitty = {
