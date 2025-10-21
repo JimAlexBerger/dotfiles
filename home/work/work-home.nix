@@ -123,6 +123,7 @@
     ladybird
     virt-manager
     immich-cli
+    immich-go
   ];
 
   programs.kitty = {
