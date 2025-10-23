@@ -31,7 +31,7 @@
   nix.settings =
     {
       extra-experimental-features = [ "nix-command" "flakes" ];
-      builders = "ssh://n651227@nrklx69109 x86_64-linux /home/n651227/.ssh/id_ed25519 - - nixos-test,big-parallel,kvm";
+      builders = "ssh://jimalexberger@reticulum x86_64-linux /home/n651227/.ssh/id_ed25519";
       builders-use-substitutes = true;
       trusted-users = [ "@wheel" ];
     };
