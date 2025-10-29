@@ -65,6 +65,12 @@
     host = "0.0.0.0";
     openFirewall = true;
   };
+
+  services.unifi = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "jimalexberger";
 
