@@ -118,6 +118,33 @@
     enable = true;
   };
 
+  services.pihole-ftl = {
+    enable = true;
+    openFirewallDNS = true;
+    openFirewallDHCP = true;
+    openFirewallWebserver = true;
+    settings = {
+      dns = {
+        upstreams = [ "8.8.8.8" "8.8.4.4" ];
+      };
+    };
+    lists = 
+      [
+        {
+          url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";
+        }
+        {
+          url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/NorwegianExperimentalList%20alternate%20versions/DandelionSproutsNorskeFiltre.tpl";
+        }
+      ];
+  };
+
+  services.pihole-web = {
+    enable = true;
+    hostName = "reticulum";
+    ports = [ "8090r" "8091s" ];
+  };
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 2283 ];
   networking.firewall.allowedUDPPorts = [ 2283 ];
