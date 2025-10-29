@@ -28,7 +28,7 @@
     pbm
     nerd-fonts.fantasque-sans-mono
     nerd-fonts.jetbrains-mono
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     dejavu_fonts
     git
     github-cli
