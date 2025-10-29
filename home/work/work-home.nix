@@ -73,7 +73,7 @@
     wl-clipboard
     nerd-fonts.fantasque-sans-mono
     nerd-fonts.jetbrains-mono
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     dejavu_fonts
     teams-for-linux
     git
