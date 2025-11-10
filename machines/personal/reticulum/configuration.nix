@@ -84,6 +84,7 @@
     wget
     git
     gh
+    ntfs3g
   ];
 
   programs.nh = {
