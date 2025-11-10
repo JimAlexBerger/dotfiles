@@ -46,6 +46,7 @@
     nh
     traceroute
     vim
+    zfs
   ];
 
   programs.btop.enable = true;

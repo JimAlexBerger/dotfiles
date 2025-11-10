@@ -27,6 +27,16 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/lacaille" = {
+    device = "lacaille";
+    fsType = "zfs";
+  };
+  
+  fileSystems."/lacaille/immich" = {
+    device = "lacaille/immich";
+    fsType = "zfs";
+  };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/98307821-0b30-4c1c-a8e8-f352d68fb106"; }];
 
