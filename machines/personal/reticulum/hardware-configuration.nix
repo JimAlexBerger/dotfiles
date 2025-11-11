@@ -36,6 +36,11 @@
     device = "lacaille/immich";
     fsType = "zfs";
   };
+  
+  fileSystems."/lacaille/couchdb" = {
+    device = "lacaille/couchdb";
+    fsType = "zfs";
+  };
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/98307821-0b30-4c1c-a8e8-f352d68fb106"; }];

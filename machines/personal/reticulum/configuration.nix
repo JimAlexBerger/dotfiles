@@ -90,6 +90,14 @@ in
     openFirewall = true;
   };
 
+  services.couchdb = {
+    enable = true;
+    databaseDir = "/lacaille/couchdb";
+    bindAddress = "0.0.0.0";
+    adminUser = "admin";
+    adminPass = "password";
+  };
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "jimalexberger";
 
@@ -166,8 +174,8 @@ in
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 2283 ];
-  networking.firewall.allowedUDPPorts = [ 2283 ];
+  networking.firewall.allowedTCPPorts = [ 22 2283 5984 ];
+  networking.firewall.allowedUDPPorts = [ 2283 5984 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
