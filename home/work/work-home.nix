@@ -100,7 +100,6 @@
     kubectx
     k9s
     pulsemixer
-    google-cloud-sdk
     nix-output-monitor
     nh
     traceroute
