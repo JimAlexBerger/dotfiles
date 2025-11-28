@@ -98,6 +98,41 @@ in
     adminPass = "password";
   };
 
+  services.traefik = {
+    enable = true;
+
+    staticConfigOptions = {
+      api.dashboard = true;
+      entryPoints.web.address = ":80";
+      entryPoints.websecure.address = ":443";
+      certificatesResolvers = {
+        myresolver = {
+          tailscale = {};
+        };
+      };
+    };
+
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          dashboard = {
+            rule = "Host(`reticulum.tailfed576.ts.net`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))";
+            service = "api@internal";
+            tls.certResolver = "myresolver";
+          };
+          immich = {
+            rule = "Host(`immich.tailfed576.ts.net`)";
+            service = "immich";
+            tls.certResolver = "myresolver";
+          };
+        };
+      };
+      services = {
+        immich.loadBalancer.servers = [ { url = "http://localhost:2283"; } ];
+      };
+    };
+  };
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "jimalexberger";
 
@@ -144,6 +179,7 @@ in
 
   services.tailscale = {
     enable = true;
+    permitCertUid = "traefik";
   };
 
   services.pihole-ftl = {
@@ -174,8 +210,8 @@ in
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 2283 5984 ];
-  networking.firewall.allowedUDPPorts = [ 2283 5984 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 2283 5984 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
