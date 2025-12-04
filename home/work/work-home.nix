@@ -123,6 +123,7 @@
     virt-manager
     immich-cli
     immich-go
+    google-chrome
   ];
 
   programs.kitty = {
