@@ -209,9 +209,23 @@ in
     ports = [ "8090r" "8091s" ];
   };
 
+  virtualisation.oci-containers.containers = {
+    ps3netsrv = {
+      image = "shawly/ps3netsrv:20250501";
+      ports = ["0.0.0.0:38008:38008"];
+      volumes = [
+        "/lacaille/isos/:/games:rw"
+      ];
+    };
+  };
+  
+  systemd.tmpfiles.rules = [
+    "d /lacaille/isos 0770 jimalexberger users -"
+  ];
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 ];
-  networking.firewall.allowedUDPPorts = [ 80 443 2283 5984 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 38008 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 2283 5984 38008 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
