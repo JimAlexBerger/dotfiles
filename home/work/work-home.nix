@@ -124,6 +124,7 @@
     immich-cli
     immich-go
     google-chrome
+    filezilla
   ];
 
   programs.kitty = {
