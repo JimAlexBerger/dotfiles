@@ -218,6 +218,23 @@ in
       ];
     };
   };
+
+  services.qbittorrent = {
+    enable = true;
+    webuiPort = 8081;
+    openFirewall = true;
+    serverConfig = {
+      LegalNotice.Accepted = true;
+      Preferences = {
+        WebUI = {
+          Username = "admin";
+          Password_PBKDF2 = "YY+2sEqJADv2+zdw3Z7qoQ==:hGeNT5rf9DCJ3Pc6JDrzcNVdVOTQkAiKuiVk9qJTqohexwrWedNMf/KdAQFa3VfIPcuF7ptYbt07PoSz95mdqg==";
+        };
+        General.Locale = "en";
+      };
+    }
+    ;
+  };
   
   systemd.tmpfiles.rules = [
     "d /lacaille/isos 0770 jimalexberger users -"
