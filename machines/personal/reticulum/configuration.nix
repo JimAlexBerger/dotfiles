@@ -217,6 +217,15 @@ in
         "/lacaille/isos/:/games:rw"
       ];
     };
+    home-assistant = {
+      volumes = [ "/lacaille/home-assistant:/config" ];
+      environment.TZ = "Europe/Oslo";
+      image = "ghcr.io/home-assistant/home-assistant:2026.1.0";
+      extraOptions = [ 
+        # Use the host network namespace for all sockets
+        "--network=host"
+      ];
+    };
   };
 
   services.qbittorrent = {
