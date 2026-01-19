@@ -85,11 +85,6 @@ in
     mediaLocation = "/lacaille/immich/immich";
   };
 
-  services.unifi = {
-    enable = true;
-    openFirewall = true;
-  };
-
   services.couchdb = {
     enable = true;
     databaseDir = "/lacaille/couchdb";
