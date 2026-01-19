@@ -220,6 +220,8 @@ in
       extraOptions = [ 
         # Use the host network namespace for all sockets
         "--network=host"
+        # Pass devices into the container, so Home Assistant can discover and make use of them
+        "--device=/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_727154bbda9aef119514b59061ce3355-if00-port0:/dev/ttyUSB0"
       ];
     };
   };
