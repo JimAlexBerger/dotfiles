@@ -47,6 +47,9 @@
     traceroute
     vim
     zfs
+    aria2
+    file
+    unzip
   ];
 
   programs.btop.enable = true;

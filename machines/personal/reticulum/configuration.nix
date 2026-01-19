@@ -147,6 +147,7 @@ in
     git
     gh
     ntfs3g
+    usbutils
   ];
 
   programs.nh = {
