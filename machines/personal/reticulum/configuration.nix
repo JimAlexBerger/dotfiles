@@ -224,6 +224,13 @@ in
         "--device=/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_727154bbda9aef119514b59061ce3355-if00-port0:/dev/ttyUSB0"
       ];
     };
+    librespeed = {
+      image = "ghcr.io/librespeed/speedtest:5.5.1";
+      environment = {
+        MODE = "standalone";
+      };
+      ports = [ "0.0.0.0:8080:8080" ];
+    };
   };
 
   services.qbittorrent = {
