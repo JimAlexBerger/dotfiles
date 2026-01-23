@@ -31,12 +31,12 @@
     device = "lacaille";
     fsType = "zfs";
   };
-  
+
   fileSystems."/lacaille/immich" = {
     device = "lacaille/immich";
     fsType = "zfs";
   };
-  
+
   fileSystems."/lacaille/couchdb" = {
     device = "lacaille/couchdb";
     fsType = "zfs";
@@ -46,7 +46,7 @@
     device = "lacaille/isos";
     fsType = "zfs";
   };
-  
+
   fileSystems."/lacaille/home-assistant" = {
     device = "lacaille/home-assistant";
     fsType = "zfs";

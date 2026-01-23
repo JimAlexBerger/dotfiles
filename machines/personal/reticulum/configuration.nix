@@ -4,12 +4,14 @@
 
 { config, pkgs, lib, ... }:
 let
-  zfsCompatibleKernelPackages = lib.filterAttrs (
-    name: kernelPackages:
-    (builtins.match "linux_[0-9]+_[0-9]+" name) != null
-    && (builtins.tryEval kernelPackages).success
-    && (!kernelPackages.${config.boot.zfs.package.kernelModuleAttribute}.meta.broken)
-  ) pkgs.linuxKernel.packages;
+  zfsCompatibleKernelPackages = lib.filterAttrs
+    (
+      name: kernelPackages:
+        (builtins.match "linux_[0-9]+_[0-9]+" name) != null
+        && (builtins.tryEval kernelPackages).success
+        && (!kernelPackages.${config.boot.zfs.package.kernelModuleAttribute}.meta.broken)
+    )
+    pkgs.linuxKernel.packages;
   latestKernelPackage = lib.last (
     lib.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)) (
       builtins.attrValues zfsCompatibleKernelPackages
@@ -102,7 +104,7 @@ in
       entryPoints.websecure.address = ":443";
       certificatesResolvers = {
         myresolver = {
-          tailscale = {};
+          tailscale = { };
         };
       };
     };
@@ -123,7 +125,7 @@ in
         };
       };
       services = {
-        immich.loadBalancer.servers = [ { url = "http://localhost:2283"; } ];
+        immich.loadBalancer.servers = [{ url = "http://localhost:2283"; }];
       };
     };
   };
@@ -188,7 +190,7 @@ in
         upstreams = [ "8.8.8.8" "8.8.4.4" ];
       };
     };
-    lists = 
+    lists =
       [
         {
           url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";
@@ -208,7 +210,7 @@ in
   virtualisation.oci-containers.containers = {
     ps3netsrv = {
       image = "shawly/ps3netsrv:20250501";
-      ports = ["0.0.0.0:38008:38008"];
+      ports = [ "0.0.0.0:38008:38008" ];
       volumes = [
         "/lacaille/isos/:/games:rw"
       ];
@@ -217,7 +219,7 @@ in
       volumes = [ "/lacaille/home-assistant:/config" ];
       environment.TZ = "Europe/Oslo";
       image = "ghcr.io/home-assistant/home-assistant:2026.1.0";
-      extraOptions = [ 
+      extraOptions = [
         # Use the host network namespace for all sockets
         "--network=host"
         # Pass devices into the container, so Home Assistant can discover and make use of them
@@ -246,10 +248,9 @@ in
         };
         General.Locale = "en";
       };
-    }
-    ;
+    };
   };
-  
+
   systemd.tmpfiles.rules = [
     "d /lacaille/isos 0770 jimalexberger users -"
   ];
