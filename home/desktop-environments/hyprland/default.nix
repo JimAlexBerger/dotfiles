@@ -160,7 +160,7 @@
         ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
-      windowrulev2 = "suppressevent maximize, class:.*";
+      windowrule = "match:class .*, suppress_event maximize";
       debug = {
         disable_logs = false;
       };

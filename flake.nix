@@ -30,6 +30,7 @@
     };
     stylix = {
       url = "github:nix-community/stylix";
+      inputs.gnome-shell.url = "github:GNOME/gnome-shell/ef02db02bf0ff342734d525b5767814770d85b49";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
