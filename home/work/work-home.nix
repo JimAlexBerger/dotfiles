@@ -298,15 +298,6 @@
 
   programs.spotify-player = {
     enable = true;
-    package = (pkgs.spotify-player.override {
-      withAudioBackend = "pulseaudio";
-      withStreaming = true;
-      withDaemon = true;
-      withMediaControl = true;
-      withImage = true;
-      withNotify = true;
-      withSixel = true;
-    });
   };
 
   programs.direnv = {
