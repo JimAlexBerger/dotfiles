@@ -23,6 +23,8 @@
     settings = {
       monitor = [
         "eDP-1,preferred,0x0,1.25"
+        "desc:Philips Consumer Electronics Company 247ELPH AU51140003100, preferred, auto-left, auto"
+        "desc:Ancor Communications Inc VG248 FALMQS03802, 1920x1080@144, auto-left, auto"
         "desc: Dell Inc. DELL UP2716D KRXTR844438L,preferred,auto-left,auto"
         "desc: Dell Inc. DELL U2412M YPPY06CF483U,preferred,auto-left,auto"
         "DP-2,preferred,auto-right,auto"
