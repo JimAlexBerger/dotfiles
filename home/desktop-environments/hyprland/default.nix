@@ -1,13 +1,11 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    hyprpaper
     hyprshot
   ];
 
   # Hyprpaper
-  services.hyprpaper.enable = true;
-  stylix.targets.hyprpaper.enable = true;
+  stylix.targets.hyprpaper.enable = true; #cannot install through hm som egl bug in hyprpaper
 
   # Hyprlock
   programs.hyprlock = {
