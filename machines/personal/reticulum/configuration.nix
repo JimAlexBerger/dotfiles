@@ -87,49 +87,6 @@ in
     mediaLocation = "/lacaille/immich/immich";
   };
 
-  services.couchdb = {
-    enable = true;
-    databaseDir = "/lacaille/couchdb";
-    bindAddress = "0.0.0.0";
-    adminUser = "admin";
-    adminPass = "password";
-  };
-
-  services.traefik = {
-    enable = true;
-
-    staticConfigOptions = {
-      api.dashboard = true;
-      entryPoints.web.address = ":80";
-      entryPoints.websecure.address = ":443";
-      certificatesResolvers = {
-        myresolver = {
-          tailscale = { };
-        };
-      };
-    };
-
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          dashboard = {
-            rule = "Host(`reticulum.tailfed576.ts.net`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))";
-            service = "api@internal";
-            tls.certResolver = "myresolver";
-          };
-          immich = {
-            rule = "Host(`immich.tailfed576.ts.net`)";
-            service = "immich";
-            tls.certResolver = "myresolver";
-          };
-        };
-      };
-      services = {
-        immich.loadBalancer.servers = [{ url = "http://localhost:2283"; }];
-      };
-    };
-  };
-
   # Enable automatic login for the user.
   services.getty.autologinUser = "jimalexberger";
 
@@ -177,35 +134,8 @@ in
 
   services.tailscale = {
     enable = true;
-    permitCertUid = "traefik";
   };
 
-  services.pihole-ftl = {
-    enable = true;
-    openFirewallDNS = true;
-    openFirewallDHCP = true;
-    openFirewallWebserver = true;
-    settings = {
-      dns = {
-        upstreams = [ "8.8.8.8" "8.8.4.4" ];
-      };
-    };
-    lists =
-      [
-        {
-          url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";
-        }
-        {
-          url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/NorwegianExperimentalList%20alternate%20versions/DandelionSproutsNorskeFiltre.tpl";
-        }
-      ];
-  };
-
-  services.pihole-web = {
-    enable = true;
-    hostName = "reticulum";
-    ports = [ "8090r" "8091s" ];
-  };
 
   virtualisation.oci-containers.containers = {
     ps3netsrv = {
