@@ -251,13 +251,18 @@ in
     };
   };
 
+  services.music-assistant = {
+    enable = true;
+    providers = [ "sendspin" "snapcast" "spotify" "chromecast" "spotify_connect" ];
+  };
+
   systemd.tmpfiles.rules = [
     "d /lacaille/isos 0770 jimalexberger users -"
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 38008 8123 ];
-  networking.firewall.allowedUDPPorts = [ 80 443 2283 5984 38008 8123 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 38008 8123 8095 8097 8098 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 2283 5984 38008 8123 8095 8097 8098 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
