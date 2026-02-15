@@ -186,6 +186,11 @@ in
     providers = [ "sendspin" "snapcast" "spotify" "chromecast" "spotify_connect" ];
   };
 
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
   systemd.tmpfiles.rules = [
     "d /lacaille/isos 0770 jimalexberger users -"
   ];
