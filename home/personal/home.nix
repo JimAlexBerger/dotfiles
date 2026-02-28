@@ -34,8 +34,14 @@
     pavucontrol
     wofi
     kdePackages.dolphin
-
+    makemkv
     nh
+    ffmpeg-full
+    jq
+    speedtest-cli
+    pciutils
+    wirelesstools
+    ab-av1
   ];
 
   programs.kitty.enable = true;

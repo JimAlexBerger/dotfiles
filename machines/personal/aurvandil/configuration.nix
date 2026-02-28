@@ -39,16 +39,16 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  # services.displayManager.sddm.enable = true;
-  # services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    # set the flake package
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  };
+ # programs.hyprland = {
+  #  enable = true;
+   # # set the flake package
+  #  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+  #  # make sure to also set the portal package, so that they are in sync
+  #  portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  #};
 
   stylix = {
     enable = true;
@@ -99,14 +99,13 @@
     git
     wget
     steam
-    mullvad-vpn
     wine
     winetricks
     cdemu-client
     cdemu-daemon
     spotify
     hyprpaper
-
+    vlc 
   ];
 
   services.spotifyd.enable = true;
@@ -153,9 +152,8 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  services.mullvad-vpn.enable = true;
-
-  system.stateVersion = "23.11";
+ 
+  system.stateVersion = "23.11"; 
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];

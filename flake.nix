@@ -66,7 +66,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
+              home-manager.backupFileExtension = "backup2";
               home-manager.users.jimalexberger = {
                 imports = [ ./home/personal/home.nix ];
               };
