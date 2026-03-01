@@ -127,6 +127,7 @@
     immich-go
     google-chrome
     filezilla
+    ab-av1
   ];
 
   programs.kitty = {
