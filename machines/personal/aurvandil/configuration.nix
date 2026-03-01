@@ -87,7 +87,13 @@
     isNormalUser = true;
     description = "Jim-Alexander Berger Seterdahl";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [ ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [ ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/Mdw+B6hzwwPJ7SvUdsUB6GreZ9K7Vq03cpUCYKViU"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEc78BxN5BQqFa1pyQx2PqXVxxBcWtc/H64yfOSCcQmP"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5fyEoIivr8pNPY2NlPanp3OMvDaJg7uwo3zwODVyZT"
+    ];
   };
 
   # Allow unfree packages
@@ -107,6 +113,17 @@
     hyprpaper
     vlc 
   ];
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = [ "jimalexberger" ];
+    };
+  };
 
   services.spotifyd.enable = true;
 
