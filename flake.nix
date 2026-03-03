@@ -46,6 +46,8 @@
       stable-overlay =
         final: prev: {
           azure-cli = pkgs-stable.azure-cli;
+          av1an-unwrapped = pkgs-stable.av1an-unwrapped;
+          av1an = pkgs-stable.av1an;
         };
       pkgs = import nixpkgs {
         inherit system;
