@@ -42,9 +42,9 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
- # programs.hyprland = {
+  # programs.hyprland = {
   #  enable = true;
-   # # set the flake package
+  # # set the flake package
   #  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   #  # make sure to also set the portal package, so that they are in sync
   #  portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
@@ -111,7 +111,7 @@
     cdemu-daemon
     spotify
     hyprpaper
-    vlc 
+    vlc
   ];
 
   # Enable the OpenSSH daemon.
@@ -169,8 +169,8 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
- 
-  system.stateVersion = "23.11"; 
+
+  system.stateVersion = "23.11";
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];

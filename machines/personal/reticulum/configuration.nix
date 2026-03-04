@@ -34,6 +34,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
   networking.hostId = "f6b9daab";
@@ -194,6 +195,65 @@ in
   systemd.tmpfiles.rules = [
     "d /lacaille/isos 0770 jimalexberger users -"
   ];
+
+  sops = {
+    age.keyFile = "/home/jimalexberger/.config/sops/age/keys.txt";
+  };
+
+  sops.secrets."traefik_env" = {
+    format = "binary";
+    owner = "traefik";
+    sopsFile = ../../../secrets/traefik/TRAEFIK_ENV;
+  };
+
+  services.traefik = {
+    enable = true;
+
+    environmentFiles = [ config.sops.secrets."traefik_env".path ];
+
+
+    staticConfigOptions = {
+      api.dashboard = true;
+      entryPoints.web = {
+        address = ":80";
+        http.redirections.entrypoint.to = "websecure";
+        http.redirections.entrypoint.scheme = "https";
+      };
+
+      entryPoints.websecure.address = ":443";
+
+      certificatesResolvers.letsencrypt.acme = {
+        storage = "${config.services.traefik.dataDir}/acme.json";
+        dnsChallenge = {
+          provider = "domeneshop";
+          delayBeforeCheck = 10;
+        };
+      };
+
+    };
+
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          dashboard = {
+            rule = "Host(`dashboard.jim-alexander.no`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))";
+            entryPoints = [ "websecure" ];
+            service = "api@internal";
+            tls.certResolver = "letsencrypt";
+          };
+          immich = {
+            rule = "Host(`immich.jim-alexander.no`)";
+            entryPoints = [ "websecure" ];
+            service = "immich";
+            tls.certResolver = "letsencrypt";
+          };
+        };
+        services = {
+          immich.loadBalancer.servers = [{ url = "http://localhost:2283"; }];
+        };
+      };
+    };
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 38008 8123 8095 8097 8098 ];

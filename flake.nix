@@ -91,6 +91,7 @@
             ./machines/personal/reticulum/configuration.nix
             ./machines/personal/reticulum/hardware-configuration.nix
             stylix.nixosModules.stylix
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

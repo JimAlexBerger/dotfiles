@@ -20,7 +20,6 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    neofetch
     manix
     fzf
     rsync

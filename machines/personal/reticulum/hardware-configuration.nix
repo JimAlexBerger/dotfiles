@@ -51,7 +51,7 @@
     device = "lacaille/home-assistant";
     fsType = "zfs";
   };
-  
+
   fileSystems."/lacaille/media" = {
     device = "lacaille/media";
     fsType = "zfs";
