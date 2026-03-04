@@ -192,6 +192,14 @@ in
     openFirewall = true;
   };
 
+  services.couchdb = {
+    enable = true;
+    databaseDir = "/lacaille/couchdb";
+    bindAddress = "0.0.0.0";
+    adminUser = "admin";
+    adminPass = "password";
+  };
+
   systemd.tmpfiles.rules = [
     "d /lacaille/isos 0770 jimalexberger users -"
   ];
@@ -247,9 +255,16 @@ in
             service = "immich";
             tls.certResolver = "letsencrypt";
           };
+          couchDb = {
+            rule = "Host(`couch.jim-alexander.no`)";
+            entryPoints = [ "websecure" ];
+            service = "couchDb";
+            tls.certResolver = "letsencrypt";
+          };
         };
         services = {
           immich.loadBalancer.servers = [{ url = "http://localhost:2283"; }];
+          couchDb.loadBalancer.servers = [{ url = "http://localhost:5984"; }];
         };
       };
     };
