@@ -50,6 +50,7 @@
     aria2
     file
     unzip
+    ffmpeg-full
   ];
 
   programs.btop.enable = true;
