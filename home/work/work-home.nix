@@ -65,9 +65,6 @@
       text = (builtins.readFile ./work/s3find.sh);
     })
     postman
-    (mpv.override {
-      youtubeSupport = false;
-    })
     rsync
     ffmpeg_7-full
     iputils

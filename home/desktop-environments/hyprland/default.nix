@@ -25,7 +25,9 @@
         "desc:Ancor Communications Inc VG248 FALMQS03802, 1920x1080@144, auto-left, auto"
         "desc: Dell Inc. DELL UP2716D KRXTR844438L,preferred,auto-left,auto"
         "desc: Dell Inc. DELL U2412M YPPY06CF483U,preferred,auto-left,auto"
+        "desc: GIGA-BYTE TECHNOLOGY CO. LTD. M27UP 0x01010101,3840x2160@160,auto-left,auto, bitdepth, 10, cm, hdr, sdrbrightness, 1.2"
         "DP-2,preferred,auto-right,auto"
+        "DP-3,3840x2160@60,auto-left,auto"
         " , preferred, auto-right, auto"
       ];
       exec-once = [
