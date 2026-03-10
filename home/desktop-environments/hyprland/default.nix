@@ -22,12 +22,10 @@
       monitor = [
         "eDP-1,preferred,0x0,1.25"
         "desc:Philips Consumer Electronics Company 247ELPH AU51140003100, preferred, auto-left, auto"
-        "desc:Ancor Communications Inc VG248 FALMQS03802, 1920x1080@144, auto-left, auto"
-        "desc: Dell Inc. DELL UP2716D KRXTR844438L,preferred,auto-left,auto"
-        "desc: Dell Inc. DELL U2412M YPPY06CF483U,preferred,auto-left,auto"
-        "desc: GIGA-BYTE TECHNOLOGY CO. LTD. M27UP 0x01010101,3840x2160@160,auto-left,auto, bitdepth, 10, cm, hdr, sdrbrightness, 1.2"
-        "DP-2,preferred,auto-right,auto"
-        "DP-3,3840x2160@60,auto-left,auto"
+        "desc:Ancor Communications Inc VG248 FALMQS038028, 1920x1080@144, auto-left, auto"
+        "desc:Dell Inc. DELL UP2716D KRXTR844438L,preferred,auto-left,auto"
+        "desc:Dell Inc. DELL U2412M YPPY06CF483U,preferred,auto-left,auto"
+        "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M27UP 0x01010101,3840x2160@160,auto-left,auto, bitdepth, 10, cm, hdr, sdrbrightness, 1.2"
         " , preferred, auto-right, auto"
       ];
       exec-once = [
