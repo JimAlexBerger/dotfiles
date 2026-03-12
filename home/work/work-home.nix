@@ -108,7 +108,7 @@
     bat
     (callPackage ../../modules/applications/pomodoro-cli.nix { })
     vim
-    gemini-cli
+    gemini-cli-bin
     nixpkgs-review
     nyxt
     azure-cli
