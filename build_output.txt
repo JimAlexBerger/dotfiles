@@ -1,0 +1,3 @@
+fetching git input 'git+file:///home/n651227/repos/dotfiles'
+fetching github input 'github:GNOME/gnome-shell/ef02db02bf0ff342734d525b5767814770d85b49'
+trace: evaluation warning: 'system' has been renamed to/replaced by 'stdenv.hostPlatform.system'

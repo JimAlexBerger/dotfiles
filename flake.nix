@@ -42,20 +42,17 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
+      pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
       stable-overlay =
         final: prev: {
           azure-cli = pkgs-stable.azure-cli;
           av1an-unwrapped = pkgs-stable.av1an-unwrapped;
           av1an = pkgs-stable.av1an;
         };
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          nixgl.overlay
-          stable-overlay
-        ];
-      };
+      pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions [
+        nixgl.overlay
+        stable-overlay
+      ]);
     in
     {
       nixosConfigurations = {
