@@ -1,4 +1,4 @@
-{ pkgs, buildDotnetModule }:
+{ pkgs, buildDotnetModule, location ? "$HOME/.config/pomodoro-cli" }:
 let
   pomodoro-cli =
     buildDotnetModule {
@@ -15,11 +15,11 @@ let
       projectFile = "pomodoro-cli.fsproj";
       selfContainedBuild = true;
     };
-  wrap-pomodoro = location:
+  wrap-pomodoro = loc:
     (pkgs.writeShellApplication {
       name = "pom";
       runtimeInputs = [ pomodoro-cli ];
-      text = "(mkdir -p ${location} && cd ${location} && exec pom \"$@\")";
+      text = "(mkdir -p \"${loc}\" && cd \"${loc}\" && exec pom \"$@\")";
     });
 in
-wrap-pomodoro "/home/n651227/.config/pomodoro-cli"
+wrap-pomodoro location

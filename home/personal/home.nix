@@ -12,7 +12,7 @@
     hello
     cowsay
     alacritty
-    neofetch
+    fastfetch
     tldr
     manix
     fzf
@@ -57,7 +57,7 @@
 
 
   home.sessionVariables = {
-    NH_FLAKE = "/home/jimalexberger/.dotfiles";
+    NH_FLAKE = "${config.home.homeDirectory}/.dotfiles";
   };
 
   nixpkgs.config.permittedInsecurePackages = [

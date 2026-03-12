@@ -108,8 +108,8 @@ in
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.extraArgs = "--keep-sice 14d --keep 10";
-    flake = "/home/jimalexberger/repos/dotfiles";
+    clean.extraArgs = "--keep-since 14d --keep 10";
+    flake = "${config.users.users.jimalexberger.home}/repos/dotfiles";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

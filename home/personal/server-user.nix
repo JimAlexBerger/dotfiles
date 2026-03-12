@@ -20,6 +20,7 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    fastfetch
     manix
     fzf
     rsync
@@ -56,11 +57,11 @@
   programs.fastfetch.enable = true;
 
   home.sessionVariables = {
-    NH_FLAKE = "/home/jimalexberger/repos/dotfiles";
+    NH_FLAKE = "${config.home.homeDirectory}/repos/dotfiles";
   };
 
   sops = {
-    age.keyFile = "/home/jimalexberger/.config/sops/age/keys.txt";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSymlinkPath = "/run/user/1000/secrets";

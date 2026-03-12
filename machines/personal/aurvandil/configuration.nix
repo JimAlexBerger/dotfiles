@@ -55,7 +55,7 @@
     autoEnable = true;
     image = pkgs.fetchurl {
       url = "https://www.pixelstalk.net/wp-content/uploads/image12/Spring-picturesque-village-image.jpg";
-      sha256 = "hpO1AAAy6/1L8cxPE/CawSsF1iFoAuE3b6Gsl6RP8e4=";
+      sha256 = "sha256-JCOuLCgPJP5j31yJ7PKk8bo6pbN5gbHdhWABu+lQ1Mk=";
     };
   };
 

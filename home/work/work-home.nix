@@ -31,7 +31,7 @@
   nix.settings =
     {
       extra-experimental-features = [ "nix-command" "flakes" ];
-      builders = "ssh://jimalexberger@reticulum x86_64-linux /home/n651227/.ssh/id_ed25519";
+      builders = "ssh://jimalexberger@reticulum x86_64-linux ${config.home.homeDirectory}/.ssh/id_ed25519";
       builders-use-substitutes = true;
       trusted-users = [ "@wheel" ];
     };
@@ -137,11 +137,11 @@
   programs.purpleExplorer.enable = true;
 
   home.sessionVariables = {
-    NH_FLAKE = "/home/n651227/repos/dotfiles";
+    NH_FLAKE = "${config.home.homeDirectory}/repos/dotfiles";
   };
 
   sops = {
-    age.keyFile = "/home/n651227/.config/sops/age/keys.txt";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSymlinkPath = "/run/user/1000/secrets";
