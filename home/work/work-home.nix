@@ -53,16 +53,8 @@
     remmina
     vault-bin
     terraform
-    (writeShellApplication {
-      name = "s3preview";
-      runtimeInputs = [ s3cmd ];
-      text = (builtins.readFile ./work/s3preview.sh);
-    })
-    (writeShellApplication {
-      name = "s3find";
-      runtimeInputs = [ s3cmd ];
-      text = (builtins.readFile ./work/s3find.sh);
-    })
+    (pkgs.callPackage ../../pkgs/s3utils/s3preview.nix { })
+    (pkgs.callPackage ../../pkgs/s3utils/s3find.nix { })
     postman
     rsync
     ffmpeg_7-full
@@ -106,7 +98,7 @@
     imagemagick
     jaq
     bat
-    (callPackage ../../modules/applications/pomodoro-cli.nix { })
+    (pkgs.callPackage ../../modules/applications/pomodoro-cli.nix { })
     vim
     gemini-cli-bin
     nixpkgs-review

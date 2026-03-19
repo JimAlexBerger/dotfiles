@@ -38,10 +38,10 @@ This document outlines the planned improvements for the dotfiles repository to e
 - [x] Replace `/home/n651227` and `/home/jimalexberger` with `${config.home.homeDirectory}`.
 - [x] Replace relative path strings with proper Nix path types where possible.
 
-## 7. Custom Scripts & Derivations
+## 7. [DONE] Custom Scripts & Derivations
 **Objective:** Improve build reproducibility and organization.
-- Move `s3find.sh` and `s3preview.sh` into `pkgs/s3utils/`.
-- Convert `purpleExplorer.nix` and `pomodoro-cli.nix` into standard `callPackage` patterns.
+- [x] Move `s3find.sh` and `s3preview.sh` into `pkgs/s3utils/`.
+- [x] Convert `purpleExplorer.nix` and `pomodoro-cli.nix` into standard `callPackage` patterns.
 
 ## 8. Flake Optimization
 **Objective:** Clean up `flake.nix` outputs.
