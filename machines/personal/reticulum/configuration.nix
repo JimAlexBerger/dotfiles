@@ -147,7 +147,7 @@ in
       ];
     };
     home-assistant = {
-      volumes = [ "/lacaille/home-assistant:/config" ];
+      volumes = [ "/lacaille/services/home-assistant:/config" ];
       environment.TZ = "Europe/Oslo";
       image = "ghcr.io/home-assistant/home-assistant:2026.1.0";
       extraOptions = [
@@ -156,6 +156,11 @@ in
         # Pass devices into the container, so Home Assistant can discover and make use of them
         "--device=/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_727154bbda9aef119514b59061ce3355-if00-port0:/dev/ttyUSB0"
       ];
+    };
+    isponsorblocktv = {
+      volumes = [ "/lacaille/services/isbtv:/app/data" ];
+      image = "ghcr.io/dmunozv04/isponsorblocktv";
+      extraOptions = [ "--network=host" ];
     };
     librespeed = {
       image = "ghcr.io/librespeed/speedtest:5.5.1";

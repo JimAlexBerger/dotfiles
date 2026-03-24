@@ -57,6 +57,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/lacaille/services" = {
+    device = "lacaille/services";
+    fsType = "zfs";
+  };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/98307821-0b30-4c1c-a8e8-f352d68fb106"; }];
 
