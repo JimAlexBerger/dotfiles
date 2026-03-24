@@ -65,7 +65,6 @@
     nerd-fonts.jetbrains-mono
     noto-fonts-color-emoji
     dejavu_fonts
-    teams-for-linux
     git
     github-cli
     htop
