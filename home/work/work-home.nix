@@ -115,6 +115,7 @@
     google-chrome
     filezilla
     ab-av1
+    signal-desktop
   ];
 
   programs.kitty = {
