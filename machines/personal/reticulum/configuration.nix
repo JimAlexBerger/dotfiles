@@ -78,6 +78,11 @@ in
     ];
   };
 
+  services.nfs.server.enable = true;
+  services.nfs.server.exports = ''
+    /lacaille/media *(rw,async,no_subtree_check)
+  '';
+
   programs.zsh.enable = true;
 
   services.immich = {
@@ -276,8 +281,8 @@ in
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 80 443 2283 5984 38008 8123 8095 8097 8098 ];
-  networking.firewall.allowedUDPPorts = [ 80 443 2283 5984 38008 8123 8095 8097 8098 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 2049 2283 5984 38008 8123 8095 8097 8098 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 2049 2283 5984 38008 8123 8095 8097 8098 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
